@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "BuilderQueue Uruchomiony",
+        "stopped": "BuilderQueue Zatrzymany",
+        "settings": "Ustawienia",
+        "settings_village_groups": "Buduj w wioskach z grupy",
+        "settings_building_sequence": "Szablon kolejki budowy",
+        "settings_building_sequence_final": "Finalne poziomy budynków",
+        "settings_priorize_farm": "Priorytet farmy, jeżeli brakuje prowiantu",
+        "settings_saved": "Ustawienia zapisane!",
+        "logs_no_builds": "Nie rozpoczęto żadnej rozbudowy",
+        "logs_clear": "Wyczyść logi",
+        "sequences": "Szablony",
+        "sequences_move_up": "Przesuń w górę",
+        "sequences_move_down": "Przesuń w dół",
+        "sequences_add_building": "Dodaj budynek",
+        "sequences_select_edit": "Wybierz szablon do edytowania",
+        "sequences_edit_sequence": "Edytuj szablon",
+        "select_group": "Wybierz grupę",
+        "add_building_success": "%d dodany na pozycji %d",
+        "add_building_limit_exceeded": "%d osiągnął/eła maksymalny poziom (%d)",
+        "position": "Pozycja",
+        "remove_building": "Usuń budynek z listy",
+        "clone": "Klonuj",
+        "remove_sequence": "Usuń wybrany szablon",
+        "name_sequence_min_lenght": "Szablon musi zawierać 3 litery.",
+        "sequence_created": "Nowy szablon %d utworzony.",
+        "sequence_updated": "Szablon %d zaktualizowany.",
+        "sequence_removed": "Szablon %d usunięty.",
+        "error_sequence_exists": "Ten szablon już istnieje.",
+        "error_sequence_no_exists": "Ta sekwencja nie istnieje.",
+        "error_sequence_invalid": "Niektóre z wartości szablonu są niepoprawne.",
+        "logs_cleared": "Logi wyczyszczone.",
+        "create_sequence": "Utwórz szablon",
+        "settings_preserve_resources": "Zarezerwowane surowce wioski",
+        "settings_preserve_wood": "Chroń daną ilość drewna",
+        "settings_preserve_clay": "Chroń daną ilość gliny",
+        "settings_preserve_iron": "Chroń daną ilość żelaza",
+        "discard_changes_title": "Niezapisany szablon",
+        "discard_changes_text": "Zaznaczona sekwencja ma niezapisane zmiany. Czy chcesz odrzucić zmiany?",
+        "clone_warn_changed_sequence_title": "Zmieniono sekwencję",
+        "clone_warn_changed_sequence_text": "Sekwencja, którą próbujesz sklonować została zmieniona. Jeśli zaakceptujesz, stara wersja zostanie sklonowana.",
+        "clone_sequence": "Kopiuj wybrany szablon",
+        "amount": "Ilość",
+        "empty_sequence": "Pusty szablon"
+    },
+    "builder_queue_add_building_modal": {
+        "title": "Dodaj nowy budynek"
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": "Nazwa szablonu"
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "Usuń szablon",
+        "text": "Jesteś pewny, że chcesz usunąć ten szablon? Jeśli ten szablon jest teraz aktywny, inny szablon zostanie wybrany i BuilderQueue zatrzyma się."
+    }
+}

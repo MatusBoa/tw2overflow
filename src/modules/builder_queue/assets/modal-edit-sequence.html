@@ -1,0 +1,51 @@
+<div id="edit-sequence-modal" class="win-content">
+    <header class="win-head">
+        <h3>{{ 'title' | i18n:loc.ale:'builder_queue_edit_sequence_modal' }}</h3>
+        <ul class="list-btn sprite">
+            <li> <a href="#" class="btn-red icon-26x26-close" ng-click="closeWindow()"></a> </li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper">
+            <div class="scroll-wrap">
+                
+                <div class="page-wrap" pagination="pagination"></div>
+                <table class="tbl-border-light tbl-striped header-center building-sequence-editor">
+                    <colgroup>
+                        <col width="5%">
+                        <col width="5%">
+                        <col>
+                        <col width="7%">
+                        <col width="10%">
+                    </colgroup>
+                    <tr>
+                        <th></th>
+                        <th tooltip="" tooltip-content="{{ 'position' | i18n:loc.ale:'builder_queue_edit_sequence_modal' }}">#</th>
+                        <th>{{ 'building' | i18n:loc.ale:'common' }}</th>
+                        <th>{{ 'level' | i18n:loc.ale:'common' }}</th>
+                        <th>{{ 'actions' | i18n:loc.ale:'common' }}</th>
+                    </tr>
+                    <tr ng-repeat="item in visibleSequence track by $index" ng-class="{'selected': item.checked}">
+                        <td>
+                            <label class="size-26x26 btn-orange icon-26x26-checkbox" ng-class="{'icon-26x26-checkbox-checked': item.checked}">
+                                <input type="checkbox" ng-model="item.checked" />
+                            </label>
+                        </td>
+                        <td>{{ pagination.offset + $index + 1 }}</td>
+                        <td><span class="building-icon icon-20x20-building-{{ item.building }}"></span> {{ item.building | i18n:loc.ale:'building_names' }}</td>
+                        <td>{{ item.level }}</td>
+                        <td><a href="#" class="size-20x20 btn-red icon-20x20-close" ng-click="removeBuilding(pagination.offset + $index)" tooltip="" tooltip-content="{{ 'remove_building' | i18n:loc.ale:'builder_queue_edit_sequence_modal' }}"></a></td>
+                    </tr>
+                </table>
+                <div class="page-wrap" pagination="pagination"></div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="win-foot sprite-fill">
+        <ul class="list-btn list-center">
+            <li><a href="#" class="btn-red btn-border" ng-click="submit()">{{ 'cancel' | i18n:loc.ale:'common' }}</a></li>
+            <li><a href="#" class="btn-orange btn-border" ng-click="submit()">{{ 'save' | i18n:loc.ale:'common' }}</a></li>
+        </ul>
+    </footer>
+</div>

@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Типы",
+        "filter_show_attacks_tooltip": "Показать атаки",
+        "filter_show_supports_tooltip": "Показать подкрепления",
+        "filter_show_relocations_tooltip": "Показать перемещения",
+        "filter_incoming_units": "Входящие войска",
+        "commands_copy_arrival_tooltip": "Копировать дату прибытия.",
+        "commands_copy_backtime_tooltip": "Копировать дату возвращения.",
+        "commands_set_remove_tooltip": "",
+        "command_type_tooltip": "Тип команды",
+        "slowest_unit_tooltip": "Самый медленный воин",
+        "command_type": "",
+        "slowest_unit": "",
+        "actions": "Действия",
+        "no_incoming": "Нет входящих команд.",
+        "copy": "Копировать",
+        "current_only_tooltip": "Только текущая деревня"
+    }
+}

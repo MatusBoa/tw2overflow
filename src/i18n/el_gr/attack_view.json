@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Είδη",
+        "filter_show_attacks_tooltip": "Επισκόπηση Επιθέσεων",
+        "filter_show_supports_tooltip": "Επισκόπηση υποστήριξεων",
+        "filter_show_relocations_tooltip": "Επισκόπηση Μετεγκατασταση",
+        "filter_incoming_units": "Εισερχόμενες Μονάδες",
+        "commands_copy_arrival_tooltip": "",
+        "commands_copy_backtime_tooltip": "",
+        "commands_set_remove_tooltip": "",
+        "command_type_tooltip": "",
+        "slowest_unit_tooltip": "",
+        "command_type": "",
+        "slowest_unit": "",
+        "actions": "",
+        "no_incoming": "",
+        "copy": "",
+        "current_only_tooltip": ""
+    }
+}

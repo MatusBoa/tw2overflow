@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Typen",
+        "filter_show_attacks_tooltip": "Zeige Angriffe",
+        "filter_show_supports_tooltip": "Zeige Unterstützungen",
+        "filter_show_relocations_tooltip": "Zeige Umsiedlungen",
+        "filter_incoming_units": "Eintreffende Einheiten",
+        "commands_copy_arrival_tooltip": "Kopiere Ankunftsdatum.",
+        "commands_copy_backtime_tooltip": "Kopiere Datum der Rückkehr.",
+        "commands_set_remove_tooltip": "Erzeuge eine Befehlskette, um alle Truppen vor dem Angriff zu versenden.",
+        "command_type_tooltip": "Befehlstyp",
+        "slowest_unit_tooltip": "Langsamste Einheit",
+        "command_type": "AT",
+        "slowest_unit": "LE",
+        "actions": "Aktionen",
+        "no_incoming": "Keine eingehenden Befehle.",
+        "copy": "Kopiere",
+        "current_only_tooltip": "Nur aktuelles Dorf"
+    }
+}

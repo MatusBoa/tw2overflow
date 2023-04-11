@@ -1,0 +1,24 @@
+<div id="show-text-modal" class="win-content">
+    <header class="win-head">
+        <h3>{{ title }}</h3>
+        <ul class="list-btn sprite">
+            <li> <a href="#" class="btn-red icon-26x26-close" ng-click="closeWindow()"></a> </li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper">
+            <div class="scroll-wrap">
+                <form ng-submit="closeWindow()">
+                    <input type="text" class="input-border text-center" ng-model="text">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="win-foot sprite-fill">
+        <ul class="list-btn list-center">
+            <li>
+                <a href="#" class="btn-green btn-border" ng-click="closeWindow()">OK</a>
+            </li>
+        </ul>
+    </footer>
+</div>

@@ -1,0 +1,9 @@
+{
+    "auto_minter": {
+        "enabled_groups": "",
+        "preserve_wood": "",
+        "preserve_clay": "",
+        "preserve_iron": "",
+        "check_interval": ""
+    }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "tw2overflow",
+  "title": "TW2Overflow",
+  "description": "Automating the boring stuff on Tribal Wars 2 with tools like auto farming, auto builder, command scheduler, minimap and more.",
+  "author": {
+    "name": "Relaxeaza",
+    "url": "https://gitlab.com/relaxeaza",
+    "email": "relaxeaza@outlook.com"
+  },
+  "private": true,
+  "version": "2.1.500",
+  "license": "WTFPL",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/relaxeaza/twoverflow"
+  },
+  "devDependencies": {
+    "archiver": "^5.2.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "html-minifier": "^4.0.0",
+    "less": "^3.11.1",
+    "terser": "^4.4.2",
+    "yargs": "^15.3.1"
+  },
+  "scripts": {
+    "make": "node make.js --lint --minify",
+    "server": "http-server ./dist/ --ssl --cert=share/server/cert.pem --key=share/server/key.pem -p 2838"
+  },
+  "dependencies": {}
+}

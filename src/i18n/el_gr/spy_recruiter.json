@@ -1,0 +1,10 @@
+{
+    "spy_recruiter": {
+        "enabled_groups": "",
+        "preserve_wood": "",
+        "preserve_clay": "",
+        "preserve_iron": "",
+        "check_interval": "",
+        "recruit_single_spy": ""
+    }
+}

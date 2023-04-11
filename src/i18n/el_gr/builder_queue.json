@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "",
+        "stopped": "",
+        "settings": "",
+        "settings_village_groups": "",
+        "settings_building_sequence": "",
+        "settings_building_sequence_final": "",
+        "settings_priorize_farm": "",
+        "settings_saved": "",
+        "logs_no_builds": "",
+        "logs_clear": "",
+        "sequences": "",
+        "sequences_move_up": "",
+        "sequences_move_down": "",
+        "sequences_add_building": "",
+        "sequences_select_edit": "",
+        "sequences_edit_sequence": "",
+        "select_group": "",
+        "add_building_success": "",
+        "add_building_limit_exceeded": "",
+        "position": "",
+        "remove_building": "",
+        "clone": "",
+        "remove_sequence": "",
+        "name_sequence_min_lenght": "",
+        "sequence_created": "",
+        "sequence_updated": "",
+        "sequence_removed": "",
+        "error_sequence_exists": "",
+        "error_sequence_no_exists": "Diese Sequenz existiert nicht.",
+        "error_sequence_invalid": "",
+        "logs_cleared": "",
+        "create_sequence": "",
+        "settings_preserve_resources": "",
+        "settings_preserve_wood": "",
+        "settings_preserve_clay": "",
+        "settings_preserve_iron": "",
+        "discard_changes_title": "",
+        "discard_changes_text": "",
+        "clone_warn_changed_sequence_title": "",
+        "clone_warn_changed_sequence_text": "",
+        "clone_sequence": "",
+        "amount": "",
+        "empty_sequence": ""
+    },
+    "builder_queue_add_building_modal": {
+        "title": ""
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": ""
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "Διαγραφή",
+        "text": ""
+    }
+}

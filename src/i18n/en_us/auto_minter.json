@@ -1,0 +1,9 @@
+{
+    "auto_minter": {
+        "enabled_groups": "Mint coins only on villages with the group",
+        "preserve_wood": "Preserve village's wood",
+        "preserve_clay": "Preserve village's clay",
+        "preserve_iron": "Preserve village's iron",
+        "check_interval": "Interval: Mint coins every"
+    }
+}

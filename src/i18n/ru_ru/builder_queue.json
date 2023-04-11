@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "Автоматическое строительство активировано",
+        "stopped": "Автоматическое строительство деактивировано",
+        "settings": "Настройки",
+        "settings_village_groups": "Строить только в деревнях с группой",
+        "settings_building_sequence": "Очередь строительства",
+        "settings_building_sequence_final": "Максимальный уровень строения",
+        "settings_priorize_farm": "",
+        "settings_saved": "Настройки сохранены!",
+        "logs_no_builds": "",
+        "logs_clear": "Очистить журнал событий",
+        "sequences": "Очередь строительства",
+        "sequences_move_up": "Ввех",
+        "sequences_move_down": "Вниз",
+        "sequences_add_building": "Добавить",
+        "sequences_select_edit": "",
+        "sequences_edit_sequence": "Редактировать очередь",
+        "select_group": "Выбрать группу",
+        "add_building_success": "",
+        "add_building_limit_exceeded": "достигнут максимальный уровень",
+        "position": "Позиция",
+        "remove_building": "Удалить строение из списка",
+        "clone": "Клонировать",
+        "remove_sequence": "",
+        "name_sequence_min_lenght": "",
+        "sequence_created": "",
+        "sequence_updated": "",
+        "sequence_removed": "",
+        "error_sequence_exists": "",
+        "error_sequence_no_exists": "",
+        "error_sequence_invalid": "",
+        "logs_cleared": "",
+        "create_sequence": "",
+        "settings_preserve_resources": "",
+        "settings_preserve_wood": "",
+        "settings_preserve_clay": "",
+        "settings_preserve_iron": "",
+        "discard_changes_title": "",
+        "discard_changes_text": "",
+        "clone_warn_changed_sequence_title": "",
+        "clone_warn_changed_sequence_text": "",
+        "clone_sequence": "",
+        "amount": "",
+        "empty_sequence": ""
+    },
+    "builder_queue_add_building_modal": {
+        "title": "Добавить строительство"
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": ""
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "",
+        "text": ""
+    }
+}

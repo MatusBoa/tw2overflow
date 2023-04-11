@@ -1,0 +1,10 @@
+{
+    "spy_recruiter": {
+        "enabled_groups": "Recrutar espiões apenas nas aldeias com grupo",
+        "preserve_wood": "Preservar madeira das aldeias",
+        "preserve_clay": "Preservar argila das aldeias",
+        "preserve_iron": "Preservar ferro das aldeias",
+        "check_interval": "Intervalo: Recrutar espiões todo",
+        "recruit_single_spy": "Recrutar apenas um espião por ciclo?"
+    }
+}

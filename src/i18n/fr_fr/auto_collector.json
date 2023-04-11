@@ -1,0 +1,7 @@
+{
+    "auto_collector": {
+        "description": "Dépôt de ressources automatique/Collecte second village.",
+        "activated": "Collecte automatique activée",
+        "deactivated": "Collecte automatique désactivée"
+    }
+}

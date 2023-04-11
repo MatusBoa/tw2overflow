@@ -1,0 +1,7 @@
+{
+    "auto_collector": {
+        "description": "Automatischer Ressourcensammler / Ausbau des zweiten Dorfs.",
+        "activated": "Automatischer Resourcensammler aktiviert",
+        "deactivated": "Automatischer Resourcensammler deaktiviert"
+    }
+}

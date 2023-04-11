@@ -1,0 +1,10 @@
+{
+    "spy_recruiter": {
+        "enabled_groups": "Rekrutuj w wioskach z grupy",
+        "preserve_wood": "Zachowaj daną ilość drewna",
+        "preserve_clay": "Zachowaj daną ilość gliny",
+        "preserve_iron": "Zachowaj daną ilość żelaza",
+        "check_interval": "Odstęp: Rekrutuj szpiegów co..",
+        "recruit_single_spy": "Rekrutować szpiega w każdej wiosce w każdym cyklu?"
+    }
+}

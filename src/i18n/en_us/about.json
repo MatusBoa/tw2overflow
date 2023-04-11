@@ -1,0 +1,10 @@
+{
+    "about": {
+        "contact": "Contact",
+        "email": "E-mail",
+        "links": "Project links",
+        "source_code": "Source Code",
+        "issues_suggestions": "Issues/suggestions",
+        "translations": "Translations"
+    }
+}

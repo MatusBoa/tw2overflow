@@ -1,0 +1,287 @@
+<div id="two-builder-queue" class="win-content two-window">
+    <header class="win-head">
+        <h2>BuilderQueue</h2>
+        <ul class="list-btn">
+            <li><a href="#" class="size-34x34 btn-red icon-26x26-close" ng-click="closeWindow()"></a></li>
+        </ul>
+    </header>
+
+    <div class="win-main small-select" scrollbar="">
+        <div class="tabs tabs-bg">
+            <div class="tabs-three-col">
+                <div class="tab" ng-click="selectTab(TAB_TYPES.SETTINGS)" ng-class="{'tab-active': selectedTab == TAB_TYPES.SETTINGS}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" ng-click="selectTab(TAB_TYPES.SEQUENCES)" ng-class="{'tab-active': selectedTab == TAB_TYPES.SEQUENCES}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.SEQUENCES}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SEQUENCES}">{{ TAB_TYPES.SEQUENCES | i18n:loc.ale:'builder_queue' }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" ng-click="selectTab(TAB_TYPES.LOGS)" ng-class="{'tab-active': selectedTab == TAB_TYPES.LOGS}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.LOGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-paper footer">
+            <div class="scroll-wrap">
+                <div ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                    <h5 class="twx-section">{{ 'settings' | i18n:loc.ale:'builder_queue' }}</h5>
+                    <table class="settings tbl-border-light tbl-striped">
+                        <colgroup>
+                            <col width="40%">
+                            <col>
+                            <col width="60px">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td><span class="ff-cell-fix">{{ 'settings_village_groups' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td colspan="2" class="text-right"><div select="" list="groups" selected="settings[SETTINGS.GROUP_VILLAGES]" drop-down="true"></div></td>
+                            </tr>
+                            <tr ng-show="settingsView.sequencesAvail">
+                                <td><span class="ff-cell-fix">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td colspan="2" class="text-right"><div select="" list="sequences" selected="settings[SETTINGS.ACTIVE_SEQUENCE]" drop-down="true"></div></td>
+                            </tr>
+                            <tr>
+                                <td><span class="ff-cell-fix">{{ 'settings_preserve_wood' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_WOOD].min" max="settingsMap[SETTINGS.PRESERVE_WOOD].max" value="settings[SETTINGS.PRESERVE_WOOD]" enabled="true"></div></td>
+                                <td><input type="number" class="preserve-resource textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_WOOD]"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="ff-cell-fix">{{ 'settings_preserve_clay' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_CLAY].min" max="settingsMap[SETTINGS.PRESERVE_CLAY].max" value="settings[SETTINGS.PRESERVE_CLAY]" enabled="true"></div></td>
+                                <td><input type="number" class="preserve-resource textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_CLAY]"></td>
+                            </tr>
+                            <tr>
+                                <td><span class="ff-cell-fix">{{ 'settings_preserve_iron' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_IRON].min" max="settingsMap[SETTINGS.PRESERVE_IRON].max" value="settings[SETTINGS.PRESERVE_IRON]" enabled="true"></div></td>
+                                <td><input type="number" class="preserve-resource textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_IRON]"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><span class="ff-cell-fix">{{ 'settings_priorize_farm' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td class="text-center"><div switch-slider="" enabled="true" border="true" value="settings[SETTINGS.PRIORIZE_FARM]" vertical="false" size="'56x28'"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="twx-section">{{ 'settings_building_sequence' | i18n:loc.ale:'builder_queue' }}</h5>
+
+                    <p ng-show="!settingsView.sequencesAvail" class="text-center">
+                        <a href="#" class="btn-orange btn-border create-sequence" ng-click="createSequence()">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a>
+                    </p>
+
+                    <div ng-if="settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length">
+                        <div class="page-wrap" pagination="pagination.buildingSequence"></div>
+                        <table class="tbl-border-light header-center building-sequence">
+                            <colgroup>
+                                <col width="5%">
+                                <col>
+                                <col width="7%">
+                                <col width="13%">
+                                <col width="8%">
+                                <col width="9%"> <!-- wood -->
+                                <col width="9%"> <!-- iron -->
+                                <col width="9%"> <!-- clay -->
+                                <col width="6%"> <!-- food -->
+                            </colgroup>
+                            <tr>
+                                <th tooltip="" tooltip-content="{{ 'position' | i18n:loc.ale:'builder_queue' }}">#</th>
+                                <th>{{ 'building' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'level' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'duration' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'points' | i18n:loc.ale:'common' }}</th>
+                                <th><span class="icon-26x26-resource-wood"></span></th>
+                                <th><span class="icon-26x26-resource-clay"></span></th>
+                                <th><span class="icon-26x26-resource-iron"></span></th>
+                                <th><span class="icon-26x26-resource-food"></span></th>
+                            </tr>
+                            <tr ng-repeat="item in settingsView.visibleBuildingSequence track by $index" class="{{ item.state }}">
+                                <td>{{ pagination.buildingSequence.offset + $index + 1 }}</td>
+                                <td>
+                                    <span class="building-icon icon-20x20-building-{{ item.building }}"></span>
+                                    {{ item.building | i18n:loc.ale:'building_names' }}
+                                </td>
+                                <td>{{ item.level }}</td>
+                                <td>{{ item.duration }}</td>
+                                <td class="green">+{{ item.levelPoints | number }}</td>
+                                <td>{{ item.price.wood | number }}</td>
+                                <td>{{ item.price.clay | number }}</td>
+                                <td>{{ item.price.iron | number }}</td>
+                                <td>{{ item.price.food | number }}</td>
+                            </tr>
+                        </table>
+                        <div class="page-wrap" pagination="pagination.buildingSequence"></div>
+                    </div>
+
+                    <h5 ng-if="settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length" class="twx-section">{{ 'settings_building_sequence_final' | i18n:loc.ale:'builder_queue' }}</h5>
+                    
+                    <table ng-if="settingsView.sequencesAvail && settingsView.visibleBuildingSequence.length" class="tbl-border-light tbl-striped header-center building-sequence-final">
+                        <colgroup>
+                            <col> <!-- name -->
+                            <col width="5%"> <!-- level -->
+                            <col width="12%"> <!-- time -->
+                            <col width="8%"> <!-- points -->
+                            <col width="11%"> <!-- wood -->
+                            <col width="11%"> <!-- iron -->
+                            <col width="11%"> <!-- clay -->
+                            <col width="7%"> <!-- food -->
+                        </colgroup>
+                        <tr>
+                            <th>{{ 'building' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'level' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'duration' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'points' | i18n:loc.ale:'common' }}</th>
+                            <th><span class="icon-26x26-resource-wood"></span></th>
+                            <th><span class="icon-26x26-resource-clay"></span></th>
+                            <th><span class="icon-26x26-resource-iron"></span></th>
+                            <th><span class="icon-26x26-resource-food"></span></th>
+                        </tr>
+                        <tr ng-repeat="item in settingsView.buildingSequenceFinal | orderBy:'order'">
+                            <td><span class="building-icon icon-20x20-building-{{ item.building }}"></span> {{ item.building | i18n:loc.ale:'building_names' }}</td>
+                            <td>{{ item.level }}</td>
+                            <td>{{ item.build_time | readableSecondsFilter }}</td>
+                            <td class="green">+{{ item.points | number }}</td>
+                            <td>{{ item.resources.wood | number }}</td>
+                            <td>{{ item.resources.clay | number }}</td>
+                            <td>{{ item.resources.iron | number }}</td>
+                            <td>{{ item.resources.food | number }}</td>
+                        </tr>
+                    </table>
+
+                    <p ng-show="settingsView.sequencesAvail && !settingsView.visibleBuildingSequence.length" class="text-center">
+                        {{ 'empty_sequence' | i18n:loc.ale:'builder_queue' }}
+                    </p>
+                </div>
+
+                <div ng-show="selectedTab === TAB_TYPES.SEQUENCES">
+                    <h5 class="twx-section">{{ 'sequences_edit_sequence' | i18n:loc.ale:'builder_queue' }}</h5>
+
+                    <p ng-show="!editorView.sequencesAvail" class="text-center">
+                        <a class="btn btn-orange create-sequence" ng-click="createSequence()">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a>
+                    </p>
+
+                    <table ng-if="editorView.sequencesAvail" class="tbl-border-light tbl-striped editor-select-sequence">
+                        <tbody>
+                            <tr>
+                                <td colspan="2"><span class="ff-cell-fix">{{ 'sequences_select_edit' | i18n:loc.ale:'builder_queue' }}</span></td>
+                                <td><div class="select-sequence-editor" select="" list="sequences" selected="editorView.selectedSequence" drop-down="true"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"><a class="btn btn-orange create-sequence" ng-click="createSequence()">{{ 'create_sequence' | i18n:loc.ale:'builder_queue' }}</a></td>
+                                <td class="text-center"><a class="btn btn-orange clone-sequence" ng-click="editorView.modal.nameSequence()">{{ 'clone_sequence' | i18n:loc.ale:'builder_queue' }}</a></td>
+                                <td class="text-center"><a class="btn btn-red remove-sequence" ng-click="editorView.modal.removeSequence()">{{ 'remove_sequence' | i18n:loc.ale:'builder_queue' }}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div ng-if="editorView.sequencesAvail">
+                        <div class="page-wrap" pagination="pagination.buildingSequenceEditor"></div>
+                        <table ng-show="editorView.visibleBuildingSequence.length" class="tbl-border-light tbl-striped header-center building-sequence-editor">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="5%">
+                                <col>
+                                <col width="7%">
+                                <col width="10%">
+                            </colgroup>
+                            <tr>
+                                <th></th>
+                                <th tooltip="" tooltip-content="{{ 'position' | i18n:loc.ale:'builder_queue' }}">#</th>
+                                <th>{{ 'building' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'level' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'actions' | i18n:loc.ale:'common' }}</th>
+                            </tr>
+                            <tr ng-repeat="item in editorView.visibleBuildingSequence track by $index" ng-class="{'selected': item.checked}">
+                                <td>
+                                    <label class="size-26x26 btn-orange icon-26x26-checkbox" ng-class="{'icon-26x26-checkbox-checked': item.checked}">
+                                        <input type="checkbox" ng-model="item.checked" />
+                                    </label>
+                                </td>
+                                <td>{{ pagination.buildingSequenceEditor.offset + $index + 1 }}</td>
+                                <td><span class="building-icon icon-20x20-building-{{ item.building }}"></span> {{ item.building | i18n:loc.ale:'building_names' }}</td>
+                                <td>{{ item.level }}</td>
+                                <td><a href="#" class="size-20x20 btn-red icon-20x20-close" ng-click="editorView.removeBuilding(pagination.buildingSequenceEditor.offset + $index)" tooltip="" tooltip-content="{{ 'remove_building' | i18n:loc.ale:'builder_queue' }}"></a></td>
+                            </tr>
+                        </table>
+                        <div class="page-wrap" pagination="pagination.buildingSequenceEditor"></div>
+
+                        <p ng-show="!editorView.visibleBuildingSequence.length" class="text-center">
+                            <a class="btn btn-border btn-orange" ng-click="editorView.modal.addBuilding()">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div ng-show="selectedTab === TAB_TYPES.LOGS" class="rich-text">
+                    <div class="page-wrap" pagination="pagination.logs"></div>
+                    <p class="text-center" ng-show="!logsView.logs.length">{{ 'logs_no_builds' | i18n:loc.ale:'builder_queue' }}</p>
+                    <table class="tbl-border-light tbl-striped header-center logs" ng-show="logsView.logs.length">
+                        <colgroup>
+                            <col width="40%">
+                            <col width="30%">
+                            <col width="5%">
+                            <col width="25%">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>{{ 'village' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'building' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'level' | i18n:loc.ale:'common' }}</th>
+                                <th>{{ 'started_at' | i18n:loc.ale:'common' }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="log in logsView.logs">
+                                <td><a class="link" ng-click="openVillageInfo(log.villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.villageId] }}</a></td>
+                                <td><span class="building-icon icon-20x20-building-{{ log.building }}"></span> {{ log.building | i18n:loc.ale:'building_names' }}</td>
+                                <td>{{ log.level }}</td>
+                                <td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="page-wrap" pagination="pagination.logs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="win-foot">
+        <ul class="list-btn list-center">
+            <li ng-show="selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail">
+                <a href="#" class="btn-border btn-orange" ng-click="saveSettings()">{{ 'save' | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.SETTINGS && settingsView.sequencesAvail">
+                <a href="#" ng-class="{false:'btn-orange', true:'btn-red'}[running]" class="btn-border" ng-click="switchBuilder()">
+                    <span ng-show="running">{{ 'pause' | i18n:loc.ale:'common' }}</span>
+                    <span ng-show="!running">{{ 'start' | i18n:loc.ale:'common' }}</span>
+                </a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.LOGS">
+                <a href="#" class="btn-border btn-orange" ng-click="logsView.clearLogs()">{{ 'logs_clear' | i18n:loc.ale:'builder_queue' }}</a>
+            </li>
+
+            <li ng-show="selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail">
+                <a href="#" class="btn-border btn-orange" ng-click="editorView.moveUp()">{{ 'sequences_move_up' | i18n:loc.ale:'builder_queue' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail">
+                <a href="#" class="btn-border btn-orange" ng-click="editorView.moveDown()">{{ 'sequences_move_down' | i18n:loc.ale:'builder_queue' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail">
+                <a href="#" class="btn-border btn-orange" ng-click="editorView.modal.addBuilding()">{{ 'sequences_add_building' | i18n:loc.ale:'builder_queue' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.SEQUENCES && editorView.sequencesAvail">
+                <a href="#" class="btn-border btn-red" ng-click="editorView.updateBuildingSequence()">{{ 'save' | i18n:loc.ale:'common' }}</a>
+            </li>
+        </ul>
+    </footer>
+</div>

@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Types",
+        "filter_show_attacks_tooltip": "Toon aanvallen",
+        "filter_show_supports_tooltip": "Toon ondersteuningen",
+        "filter_show_relocations_tooltip": "Toon herplaatsingen",
+        "filter_incoming_units": "Inkomende eenheden",
+        "commands_copy_arrival_tooltip": "Kopieer datum van aankomst.",
+        "commands_copy_backtime_tooltip": "Kopier backtime datum.",
+        "commands_set_remove_tooltip": "Dodge de aanval met alle units.",
+        "command_type_tooltip": "Commando type\n",
+        "slowest_unit_tooltip": "Langzaamste eenheid",
+        "command_type": "CT",
+        "slowest_unit": "TE",
+        "actions": "Acties",
+        "no_incoming": "Geen inkomende commandos.",
+        "copy": "Kopiëren",
+        "current_only_tooltip": "Alleen het huidige dorp"
+    }
+}

@@ -1,0 +1,25 @@
+<div id="name-sequence-modal" class="win-content">
+    <header class="win-head">
+        <h3>{{ 'title' | i18n:loc.ale:'builder_queue_name_sequence_modal' }}</h3>
+        <ul class="list-btn sprite">
+            <li> <a href="#" class="btn-red icon-26x26-close" ng-click="closeWindow()"></a> </li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper">
+            <div class="scroll-wrap">
+                <div class="box-border-light input-wrapper name_preset">
+                    <form ng-submit="submit()">
+                        <input type="text" focus="true" ng-model="name" minlength="3" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="win-foot sprite-fill">
+        <ul class="list-btn list-center">
+            <li> <a href="#" class="btn-red btn-border btn-premium" ng-click="closeWindow()"> {{ 'cancel' | i18n:loc.ale:'common' }} </a> </li>
+            <li> <a href="#" class="btn-orange btn-border" ng-click="submit()">{{ 'add' | i18n:loc.ale:'common' }}</a> </li>
+        </ul>
+    </footer>
+</div>

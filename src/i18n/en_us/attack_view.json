@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Types",
+        "filter_show_attacks_tooltip": "Show attacks",
+        "filter_show_supports_tooltip": "Show supports",
+        "filter_show_relocations_tooltip": "Show relocations",
+        "filter_incoming_units": "Incoming Units",
+        "commands_copy_arrival_tooltip": "Copy arrival date.",
+        "commands_copy_backtime_tooltip": "Copy backtime date.",
+        "commands_set_remove_tooltip": "Set a CommandQueue to remove all troops before the attack hit.",
+        "command_type_tooltip": "Command Type",
+        "slowest_unit_tooltip": "Slowest Unit",
+        "command_type": "CT",
+        "slowest_unit": "SU",
+        "actions": "Actions",
+        "no_incoming": "No commands incoming.",
+        "copy": "Copy",
+        "current_only_tooltip": "Current village only"
+    }
+}

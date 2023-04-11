@@ -1,0 +1,311 @@
+#two-command-queue {
+    input.unit {
+        width: 80px;
+        height: 34px;
+    }
+
+    form {
+        .padded {
+            padding: 2px 8px;
+        }
+    }
+
+    .basic-config input {
+        width: 200px;
+        height: 28px;
+        font-weight: bold;
+        padding: 1px 8px 0 8px;
+        outline: none;
+        border: none;
+        color: #000;
+        resize: none;
+    }
+
+    span.select-wrapper {
+        height: 27px;
+
+        a.select-button {
+            height: 23px;
+        }
+
+        a.select-handler {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            height: 23px;
+            line-height: 23px;
+            margin-bottom: -1px;
+        }
+    }
+
+    .custom-select {
+        width: 240px;
+    }
+
+    .originVillage,
+    .targetVillage {
+        padding: 0 7px;
+    }
+
+    a.btn {
+        height: 28px;
+        line-height: 28px;
+        padding: 0 10px;
+    }
+
+    .actions {
+        text-align: center;
+        user-select: none
+    }
+
+    .command-village {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .add-units {
+        td {
+            padding: 2px 0;
+            text-align: center;
+        }
+
+        .unit-icon {
+            top: -1px;
+        }
+
+        span[class*="icon-34x34"] {
+            margin-top: -2px !important;
+        }
+
+        input {
+            height: 34px;
+            color: #fff3d0;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: url(data:image/png;base64,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) top left #b89064;
+            box-shadow: inset 0 0 0 1px #000,
+                        inset 0 0 0 2px #a2682c,
+                        inset 0 0 0 3px #000,
+                        inset -3px -3px 2px 0 #fff,
+                        inset 0 0 9px 5px rgba(99,54,0,0.5);
+            text-align: center;
+            width: 80px;
+        }
+    }
+
+    .add-officers {
+        .cell-officers {
+            padding: 7px 11px 5px 11px;
+        }
+
+        .amount {
+            color: #fff;
+            text-align: center;
+        }
+    }
+
+    .command {
+        margin-bottom: 10px;
+
+        .time-left {
+            width: 93px;
+            display: inline-block;
+            padding: 0 0 0 3px;
+        }
+
+        .sent-time,
+        .arrive-time {
+            width: 160px;
+            display: inline-block;
+            padding: 0 0 0 5px;
+        }
+
+        td {
+            padding: 3px 6px;
+        }
+    }
+
+    .officers {
+        td {
+            width: 111px;
+            text-align: center;
+        }
+
+        label {
+            margin-left: 5px;
+        }
+
+        span {
+            margin-left: 2px;
+        }
+    }
+
+    .units {
+        div.unit {
+            float: left;
+
+            span.icon {
+                transform: scale(0.7);
+                width: 25px;
+                height: 25px;
+            }
+
+            span.amount {
+                vertical-align: -2px;
+                margin: 0 5px 0 2px;
+            }
+        }
+
+        div.officer {
+            float: left;
+            margin: 0 2px;
+
+            span {
+                transform: scale(0.7);
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+
+    .remove-command {
+        float: right;
+        margin-top: 3px;
+    }
+
+    .tbl-units td {
+        text-align: center;
+    }
+
+    .tbl-speed {
+        margin-top: 10px;
+
+        th {
+            text-align: center;
+        }
+
+        td {
+            font-size: 12px;
+        }
+
+        .box-time-sub-icon {
+            position: relative;
+
+            .time-icon {
+                position: absolute;
+                top: -3px;
+                left: 27px;
+                transform: scale(0.7);
+            }
+        }
+
+        .box-time-sub-icon.time-relocate .time-icon {
+            top: -6px;
+            left: 26px;
+        }
+
+        .valid {
+            color: #16600a;
+        }
+
+        .invalid {
+            color: #a1251f;
+        }
+
+        .neutral {
+            color: #000;
+        }
+    }
+
+    .dateType {
+        width: 200px;
+        
+        .custom-select-handler {
+            text-align: left;
+        }
+    }
+
+    .filters {
+        .icon {
+            width: 38px;
+            float: left;
+            margin: 0 6px;
+
+            &.active:before {
+                box-shadow: 0 0 0 1px #000, -1px -1px 0 2px #ac9c44, 0 0 0 3px #ac9c44, 0 0 0 4px #000;
+                border-radius: 1px;
+                content: "";
+                position: absolute;
+                width: 38px;
+                height: 38px;
+                left: -1px;
+                top: -1px;
+            }
+        }
+
+        .text {
+            margin-left: 262px;
+
+            input {
+                height: 36px;
+                margin-top: 1px;
+                width: 100%;
+                text-align: left;
+                padding: 0 5px;
+
+                &::placeholder {
+                    color: white;
+                }
+
+                &:focus::placeholder {
+                    color: transparent;
+                }
+            }
+        }
+
+        td {
+            padding: 6px;
+        }
+    }
+
+    .icon-34x34-barbarian-village:before {
+        filter: grayscale(100%);
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -220px -906px;
+    }
+
+    .icon-20x20-time-arrival:before {
+        transform: scale(0.8);
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -529px -454px;
+    }
+
+    .icon-20x20-attack:before {
+        transform: scale(0.8);
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -546px -1086px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .icon-20x20-support:before {
+        transform: scale(0.8);
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -462px -360px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .icon-20x20-relocate:before {
+        transform: scale(0.8);
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -1090px -130px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .icon-26x26-attack:before {
+        background-image: url(https://i.imgur.com/ozI4k0h.png);
+        background-position: -546px -1086px;
+    }
+}

@@ -1,0 +1,27 @@
+files:
+  - source: /src/i18n/en_us/*.json
+    translation: /src/i18n/%locale_with_underscore%/%original_file_name%
+    languages_mapping:
+      locale_with_underscore:
+        ro: ro_ro
+        fr: fr_fr
+        es-ES: es_es
+        cs: cs_cz
+        de: de_de
+        el: el_gr
+        nl: nl_nl
+        pl: pl_pl
+        ru: ru_ru
+        pt-BR: pt_br
+        en-US: en_us
+export_languages:
+  - ro
+  - fr
+  - es-ES
+  - cs
+  - de
+  - el
+  - nl
+  - pl
+  - ru
+  - pt-BR

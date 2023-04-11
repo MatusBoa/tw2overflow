@@ -1,0 +1,79 @@
+<div id="two-auto-minter" class="win-content two-window">
+    <header class="win-head">
+        <h2>Auto Coin Minter</h2>
+        <ul class="list-btn">
+            <li><a href="#" class="size-34x34 btn-red icon-26x26-close" ng-click="closeWindow()"></a></li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="tabs tabs-bg">
+            <div class="tabs-one-col">
+                <div class="tab" ng-click="selectTab(TAB_TYPES.SETTINGS)" ng-class="{'tab-active': selectedTab == TAB_TYPES.SETTINGS}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-paper footer">
+            <div class="scroll-wrap">
+
+                <!-- settings -->
+                <div class="settings" ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col>
+                            <col width="200px">
+                            <col width="60px">
+                        </colgroup>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'enabled_groups' | i18n:loc.ale:'auto_minter' }}</span></td>
+                            <td colspan="2"><div select="" list="groups" selected="settings[SETTINGS.ENABLED_GROUPS]" drop-down="true"></div></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'preserve_wood' | i18n:loc.ale:'auto_minter' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_WOOD].min" max="settingsMap[SETTINGS.PRESERVE_WOOD].max" value="settings[SETTINGS.PRESERVE_WOOD]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_WOOD]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'preserve_clay' | i18n:loc.ale:'auto_minter' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_CLAY].min" max="settingsMap[SETTINGS.PRESERVE_CLAY].max" value="settings[SETTINGS.PRESERVE_CLAY]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_CLAY]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'preserve_iron' | i18n:loc.ale:'auto_minter' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_IRON].min" max="settingsMap[SETTINGS.PRESERVE_IRON].max" value="settings[SETTINGS.PRESERVE_IRON]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_IRON]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'check_interval' | i18n:loc.ale:'auto_minter' }}</span></td>
+                            <td colspan="2" class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.CHECK_INTERVAL]"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="win-foot">
+        <ul class="list-btn list-center">
+            <li ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                <a href="#" class="btn-border btn-red" ng-click="saveSettings()">{{ 'save' | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li>
+                <a href="#" ng-class="{false:'btn-green', true:'btn-red'}[running]" class="btn-border" ng-click="switchState()">
+                    <span ng-show="running">{{ 'pause' | i18n:loc.ale:'common' }}</span>
+                    <span ng-show="!running">{{ 'start' | i18n:loc.ale:'common' }}</span>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>

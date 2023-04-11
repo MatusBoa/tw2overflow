@@ -1,0 +1,7 @@
+{
+    "auto_collector": {
+        "description": "Coletor automático para Depósito de Recursos/Segunda Aldeia.",
+        "activated": "Coletor Automático ativado",
+        "deactivated": "Coletor Automático desativado"
+    }
+}

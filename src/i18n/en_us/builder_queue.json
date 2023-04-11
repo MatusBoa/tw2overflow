@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "BuilderQueue started",
+        "stopped": "BuilderQueue stopped",
+        "settings": "Settings",
+        "settings_village_groups": "Build only on villages with the group",
+        "settings_building_sequence": "Building sequence",
+        "settings_building_sequence_final": "Buildings final levels",
+        "settings_priorize_farm": "Priorize farm if it's full",
+        "settings_saved": "Settings saved!",
+        "logs_no_builds": "No builds started",
+        "logs_clear": "Clear logs",
+        "sequences": "Sequences",
+        "sequences_move_up": "Move up",
+        "sequences_move_down": "Move down",
+        "sequences_add_building": "Add building",
+        "sequences_select_edit": "Select a sequence to edit",
+        "sequences_edit_sequence": "Edit sequence",
+        "select_group": "Select a group",
+        "add_building_success": "%d has added at position %d",
+        "add_building_limit_exceeded": "%d reached maximum level (%d)",
+        "position": "Position",
+        "remove_building": "Remove building from list",
+        "clone": "Clone",
+        "remove_sequence": "Remove selected sequence",
+        "name_sequence_min_lenght": "The sequence name must have at least 3 character.",
+        "sequence_created": "New sequence %d created.",
+        "sequence_updated": "Sequence %d updated.",
+        "sequence_removed": "Sequence %d removed.",
+        "error_sequence_exists": "This sequence already exists.",
+        "error_sequence_no_exists": "This sequence doesn't exist.",
+        "error_sequence_invalid": "Some sequence's value is invalid.",
+        "logs_cleared": "Logs cleared.",
+        "create_sequence": "Create a sequence",
+        "settings_preserve_resources": "Preserve village's resources",
+        "settings_preserve_wood": "Preserve village's wood",
+        "settings_preserve_clay": "Preserve village's clay",
+        "settings_preserve_iron": "Preserve village's iron",
+        "discard_changes_title": "Unsaved sequence",
+        "discard_changes_text": "The selected sequence have unsaved changes. Are you sure you want to discard the changes?",
+        "clone_warn_changed_sequence_title": "Changed sequence",
+        "clone_warn_changed_sequence_text": "The sequence you are trying to clone was changed. If you accept, the old version will be cloned.",
+        "clone_sequence": "Clone selected sequence",
+        "amount": "Amount",
+        "empty_sequence": "Empty sequence"
+    },
+    "builder_queue_add_building_modal": {
+        "title": "Add new building"
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": "Sequence name"
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "Remove sequence",
+        "text": "Are you sure to remove this sequence? If this sequence is the active one, another sequence will be selected and the BuilderQueue stopped."
+    }
+}

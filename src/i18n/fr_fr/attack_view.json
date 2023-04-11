@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "",
+        "filter_show_attacks_tooltip": "Montrer les attaques",
+        "filter_show_supports_tooltip": "Montrer les soutiens",
+        "filter_show_relocations_tooltip": "Montrer les relocalisations",
+        "filter_incoming_units": "Troupes entrantes",
+        "commands_copy_arrival_tooltip": "Copier la date d'arrivée.",
+        "commands_copy_backtime_tooltip": "Copier la date de retour.",
+        "commands_set_remove_tooltip": "Définissez une file d'attente pour supprimer toutes les troupes avant l'attaque.",
+        "command_type_tooltip": "Type de commande",
+        "slowest_unit_tooltip": "Troupe la plus lente",
+        "command_type": "TC",
+        "slowest_unit": "UL",
+        "actions": "",
+        "no_incoming": "Pas de commandes entrante.",
+        "copy": "Copier",
+        "current_only_tooltip": "Village actuel seulement"
+    }
+}

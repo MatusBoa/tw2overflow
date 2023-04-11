@@ -1,0 +1,9 @@
+{
+    "auto_minter": {
+        "enabled_groups": "Buduj w wioskach z grupy",
+        "preserve_wood": "Zachowane drewno w wiosce",
+        "preserve_clay": "Zachowana glina w wiosce",
+        "preserve_iron": "Zachowane żelazo w wiosce",
+        "check_interval": "Odstęp miedzy biciem monet"
+    }
+}

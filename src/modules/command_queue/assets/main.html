@@ -1,0 +1,454 @@
+<div id="two-command-queue" class="win-content two-window">
+    <header class="win-head">
+        <h2>CommandQueue</h2>
+        <ul class="list-btn">
+            <li><a href="#" class="size-34x34 btn-red icon-26x26-close" ng-click="closeWindow()"></a></li>
+        </ul>
+    </header>
+
+    <div class="win-main" scrollbar="">
+        <div class="tabs tabs-bg">
+            <div class="tabs-three-col">
+                <div class="tab" ng-click="selectTab(TAB_TYPES.ADD)" ng-class="{true:'tab-active', false:''}[selectedTab == TAB_TYPES.ADD]">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.ADD}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.ADD}">{{ 'tab_add' | i18n:loc.ale:'command_queue' }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab" ng-click="selectTab(TAB_TYPES.WAITING)" ng-class="{true:'tab-active', false:''}[selectedTab == TAB_TYPES.WAITING]">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.WAITING}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.WAITING}">{{ 'tab_waiting' | i18n:loc.ale:'command_queue' }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab" ng-click="selectTab(TAB_TYPES.LOGS)" ng-class="{true:'tab-active', false:''}[selectedTab == TAB_TYPES.LOGS]">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.LOGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}">{{ 'tab_logs' | i18n:loc.ale:'command_queue' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-paper footer">
+            <div class="scroll-wrap">
+                <div class="add" ng-show="selectedTab === TAB_TYPES.ADD">
+                    <form class="addForm">
+                        <div>
+                            <table class="tbl-border-light tbl-striped basic-config">
+                                <colgroup>
+                                    <col width="30%">
+                                    <col width="5%">
+                                    <col>
+                                    <col width="25%">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <td><div auto-complete="autoCompleteOrigin"></div></td>
+                                        <td class="text-center"><span class="icon-26x26-rte-village"></span></td>
+                                        <td ng-if="!commandData.origin" class="command-village">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}</td>
+                                        <td ng-if="commandData.origin" class="command-village">{{ commandData.origin.name }} ({{ commandData.origin.x }}|{{ commandData.origin.y }})</td>
+                                        <td class="actions">
+                                            <a class="btn btn-orange" ng-click="addSelected()" tooltip="" tooltip-content="{{ 'add_selected' | i18n:loc.ale:'command_queue' }}">{{ 'selected' | i18n:loc.ale:'common' }}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><div auto-complete="autoCompleteTarget"></div></td>
+                                        <td class="text-center"><span class="icon-26x26-rte-village"></span></td>
+                                        <td ng-if="!commandData.target" class="command-village">{{ 'add_no_village' | i18n:loc.ale:'command_queue' }}</td>
+                                        <td ng-if="commandData.target" class="command-village">{{ commandData.target.name }} ({{ commandData.target.x }}|{{ commandData.target.y }})</td>
+                                        <td class="actions">
+                                            <a class="btn btn-orange" ng-click="addMapSelected()" tooltip="" tooltip-content="{{ 'add_map_selected' | i18n:loc.ale:'command_queue' }}">{{ 'selected' | i18n:loc.ale:'common' }}</a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input type="text" ng-model="commandData.date" class="textfield-border date" pattern="\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(:\\d{1,3})? \\d{1,2}\\/\\d{1,2}\\/\\d{4}\\s*" placeholder="{{ 'add_date' | i18n:loc.ale:'command_queue' }}" tooltip="" tooltip-content="hh:mm:ss:SSS dd/MM/yyyy">
+                                        </td>
+                                        <td class="text-center"><span class="icon-26x26-time"></span></td>
+                                        <td><div select="" list="dateTypes" selected="selectedDateType" drop-down="true"></div></td>
+                                        <td class="actions">
+                                            <a class="btn btn-orange" ng-click="reduceDate()" tooltip="" tooltip-content="{{ 'add_current_date_minus' | i18n:loc.ale:'command_queue' }}">-</a><a class="btn btn-orange" ng-click="addCurrentDate()" tooltip="" tooltip-content="{{ 'add_current_date' | i18n:loc.ale:'command_queue' }}">{{ 'now' | i18n:loc.ale:'common' }}</a><a class="btn btn-orange" ng-click="incrementDate()" tooltip="" tooltip-content="{{ 'add_current_date_plus' | i18n:loc.ale:'command_queue' }}">+</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table ng-show="commandData.origin && commandData.target" class="tbl-border-light tbl-units tbl-speed screen-village-info">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7">{{ 'speed_title' | i18n:loc.ale:'screen_village_info' }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="odd">
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-34x34-unit-knight"></span>
+                                                <span class="icon icon-34x34-unit-light_cavalry"></span>
+                                                <span class="icon icon-34x34-unit-mounted_archer"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub-icon time-attack {{ travelTimes.attack.light_cavalry.status }}"><div class="time-icon icon-20x20-attack-check" tooltip="" tooltip-content="{{ 'travel_time_attack' | i18n:loc.ale:'military_operations' }}"></div>{{ travelTimes.attack.light_cavalry.travelTime }}</div>
+                                                <div class="box-time-sub-icon time-support {{ travelTimes.support.light_cavalry.status }}"><div class="time-icon icon-20x20-support-check" tooltip="" tooltip-content="{{ 'travel_time_support' | i18n:loc.ale:'military_operations' }}"></div>{{ travelTimes.support.light_cavalry.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub-icon time-relocate {{ travelTimes.relocate.light_cavalry.status }}"><div class="time-icon icon-20x20-relocate" tooltip="" tooltip-content="{{ 'travel_time_relocate' | i18n:loc.ale:'military_operations' }}"></div>{{ travelTimes.relocate.light_cavalry.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-single icon-34x34-unit-heavy_cavalry"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.heavy_cavalry.status }}">{{ travelTimes.attack.heavy_cavalry.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.heavy_cavalry.status }}">{{ travelTimes.support.heavy_cavalry.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.heavy_cavalry.status }}">{{ travelTimes.relocate.heavy_cavalry.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="odd">
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-34x34-unit-archer"></span>
+                                                <span class="icon icon-34x34-unit-spear"></span>
+                                                <span class="icon icon-34x34-unit-axe"></span>
+                                                <span class="icon icon-34x34-unit-doppelsoldner"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.archer.status }}">{{ travelTimes.attack.archer.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.archer.status }}">{{ travelTimes.support.archer.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.archer.status }}">{{ travelTimes.relocate.archer.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-single icon-34x34-unit-sword"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.sword.status }}">{{ travelTimes.attack.sword.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.sword.status }}">{{ travelTimes.support.sword.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.sword.status }}">{{ travelTimes.relocate.sword.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="odd">
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-34x34-unit-catapult"></span>
+                                                <span class="icon icon-34x34-unit-ram"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.ram.status }}">{{ travelTimes.attack.ram.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.ram.status }}">{{ travelTimes.support.ram.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.ram.status }}">{{ travelTimes.relocate.ram.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-single icon-34x34-unit-snob"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.snob.status }}">{{ travelTimes.attack.snob.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.snob.status }}">{{ travelTimes.support.snob.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.snob.status }}">-</div>
+                                            </div>
+                                        </td>
+                                        <td class="odd">
+                                            <div class="unit-wrap">
+                                                <span class="icon icon-single icon-34x34-unit-trebuchet"></span>
+                                            </div>
+
+                                            <div>
+                                                <div class="box-time-sub time-attack {{ travelTimes.attack.trebuchet.status }}">{{ travelTimes.attack.trebuchet.travelTime }}</div>
+                                                <div class="box-time-sub time-support {{ travelTimes.support.trebuchet.status }}">{{ travelTimes.support.trebuchet.travelTime }}</div>
+                                                <div ng-if="relocateEnabled" class="box-time-sub time-relocate {{ travelTimes.relocate.trebuchet.status }}">{{ travelTimes.relocate.trebuchet.travelTime }}</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="twx-section">{{ 'units' | i18n:loc.ale:'common' }}</h5>
+                        <table class="tbl-border-light tbl-striped">
+                            <colgroup>
+                                <col width="25%">
+                                <col width="25%">
+                                <col width="25%">
+                                <col width="25%">
+                            </colgroup>
+                            <tbody class="add-units">
+                                <tr>
+                                    <td colspan="4" class="actions">
+                                        <ul class="list-btn list-center">
+                                            <li><div select="" list="presets" selected="selectedInsertPreset" drop-down="true"></div></li>
+                                            <li><a class="clear-units btn btn-orange" ng-click="cleanUnitInputs()">{{ 'add_clear' | i18n:loc.ale:'command_queue' }}</a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <tr ng-repeat="i in [] | range:(unitOrder.length / 4);">
+                                    <td>
+                                        <span class="icon-bg-black" ng-class="'icon-34x34-unit-' + unitOrder[i * 4]" tooltip="" tooltip-content="{{ unitOrder[i * 4] | i18n:loc.ale:'unit_names' }}"></span>
+                                        <input remove-zero="" type="text" ng-model="commandData.units[unitOrder[i * 4]]" maxlength="5" placeholder="{{ commandData.units[unitOrder[i * 4]] }}" ng-focus="onUnitInputFocus(unitOrder[i * 4])" ng-blur="onUnitInputBlur(unitOrder[i * 4])">
+                                    </td>
+                                    <td>
+                                        <span class="icon-bg-black" ng-class="'icon-34x34-unit-' + unitOrder[i * 4 + 1]" tooltip="" tooltip-content="{{ unitOrder[i * 4 + 1] | i18n:loc.ale:'unit_names' }}"></span>
+                                        <input remove-zero="" type="text" ng-model="commandData.units[unitOrder[i * 4 + 1]]" maxlength="5" placeholder="{{ commandData.units[unitOrder[i * 4 + 1]] }}" ng-focus="onUnitInputFocus(unitOrder[i * 4 + 1])" ng-blur="onUnitInputBlur(unitOrder[i * 4 + 1])">
+                                    </td>
+                                    <td>
+                                        <span class="icon-bg-black" ng-class="'icon-34x34-unit-' + unitOrder[i * 4 + 2]" tooltip="" tooltip-content="{{ unitOrder[i * 4 + 2] | i18n:loc.ale:'unit_names' }}"></span>
+                                        <input remove-zero="" type="text" ng-model="commandData.units[unitOrder[i * 4 + 2]]" maxlength="5" placeholder="{{ commandData.units[unitOrder[i * 4 + 2]] }}" ng-focus="onUnitInputFocus(unitOrder[i * 4 + 2])" ng-blur="onUnitInputBlur(unitOrder[i * 4 + 2])">
+                                    </td>
+                                    <td>
+                                        <span class="icon-bg-black" ng-class="'icon-34x34-unit-' + unitOrder[i * 4 + 3]" tooltip="" tooltip-content="{{ unitOrder[i * 4 + 3] | i18n:loc.ale:'unit_names' }}"></span>
+                                        <input remove-zero="" type="text" ng-model="commandData.units[unitOrder[i * 4 + 3]]" maxlength="5" placeholder="{{ commandData.units[unitOrder[i * 4 + 3]] }}" ng-focus="onUnitInputFocus(unitOrder[i * 4 + 3])" ng-blur="onUnitInputBlur(unitOrder[i * 4 + 3])">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <span class="icon-bg-black icon-34x34-unit-catapult" tooltip="" tooltip-content="{{ 'catapult' | i18n:loc.ale:'unit_names' }}"></span>
+                                        <input remove-zero="" type="text" ng-model="commandData.units.catapult" maxlength="5" placeholder="{{ commandData.units.catapult }}" ng-keyup="catapultTargetVisibility()" ng-focus="onUnitInputFocus('catapult')" ng-blur="onUnitInputBlur('catapult')">
+                                    </td>
+                                    <td colspan="3">
+                                        <div ng-visible="showCatapultSelect">
+                                            <div class="unit-border box-slider">
+                                                <div class="height-wrapper">
+                                                    <div select="" list="attackableBuildings" selected="catapultTarget"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5 class="twx-section">{{ 'officers' | i18n:loc.ale:'common' }}</h5>
+
+                        <table class="add-officers margin-top tbl-border-light tbl-officers">
+                            <tbody>
+                                <tr>
+                                    <td class="cell-officers" ng-repeat="officer in officers">
+                                        <table class="tbl-border-dark tbl-officer">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="cell-space" > <span class="icon-44x44-premium_officer_{{ officer }}"></span> </td>
+                                                    <td class="cell-officer-switch" rowspan="2">
+                                                        <div switch-slider="" enabled="true" value="commandData.officers[officer]" vertical="true" size="'34x66'"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td tooltip="" tooltip-content="{{ 'available_officers' | i18n:loc.ale:'modal_preset_edit' }}">
+                                                        <div class="amount">{{ inventory.getItemAmountByType('premium_officer_' + officer) | number }}</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                
+                <div class="waiting rich-text" ng-show="selectedTab === TAB_TYPES.WAITING">
+                    <div class="filters">
+                        <table class="tbl-border-light">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div ng-class="{'active': activeFilters[FILTER_TYPES.SELECTED_VILLAGE]}" ng-click="toggleFilter(FILTER_TYPES.SELECTED_VILLAGE)" class="box-border-dark icon selectedVillage" tooltip="" tooltip-content="{{ 'filters_selected_village' | i18n:loc.ale:'command_queue' }}">
+                                            <span class="icon-34x34-village-info icon-bg-black"></span>
+                                        </div>
+                                        <div ng-class="{'active': activeFilters[FILTER_TYPES.BARBARIAN_TARGET]}" ng-click="toggleFilter(FILTER_TYPES.BARBARIAN_TARGET)" class="box-border-dark icon barbarianTarget" tooltip="" tooltip-content="{{ 'filters_barbarian_target' | i18n:loc.ale:'command_queue' }}">
+                                            <span class="icon-34x34-barbarian-village icon-bg-black"></span>
+                                        </div>
+                                        <div ng-class="{'active': activeFilters[FILTER_TYPES.ATTACK]}" ng-click="toggleFilter(FILTER_TYPES.ATTACK, true)" class="box-border-dark icon allowedTypes" tooltip="" tooltip-content="{{ 'filters_attack' | i18n:loc.ale:'command_queue' }}">
+                                            <span class="icon-34x34-attack icon-bg-black"></span>
+                                        </div>
+                                        <div ng-class="{'active': activeFilters[FILTER_TYPES.SUPPORT]}" ng-click="toggleFilter(FILTER_TYPES.SUPPORT, true)" class="box-border-dark icon allowedTypes" tooltip="" tooltip-content="{{ 'filters_support' | i18n:loc.ale:'command_queue' }}">
+                                            <span class="icon-34x34-support icon-bg-black"></span>
+                                        </div>
+                                        <div ng-if="relocateEnabled" ng-class="{'active': activeFilters[FILTER_TYPES.RELOCATE]}" ng-click="toggleFilter(FILTER_TYPES.RELOCATE, true)" class="box-border-dark icon allowedTypes" tooltip="" tooltip-content="{{ 'filters_relocate' | i18n:loc.ale:'command_queue' }}">
+                                            <span class="icon-34x34-relocate icon-bg-black"></span>
+                                        </div>
+                                        <div class="text">
+                                            <input ng-model="filtersData[FILTER_TYPES.TEXT_MATCH]" type="text" class="box-border-dark" placeholder="{{ 'filters_text_match' | i18n:loc.ale:'command_queue' }}">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="queue">
+                        <h5 class="twx-section">{{ 'queue_waiting' | i18n:loc.ale:'command_queue' }}</h5>
+                        <p class="text-center" ng-show="!visibleWaitingCommands.length">{{ 'queue_none_added' | i18n:loc.ale:'command_queue' }}</p>
+
+                        <table class="tbl-border-light" ng-repeat="command in visibleWaitingCommands">
+                            <colgroup>
+                                <col width="100px">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th colspan="2">
+                                        <span ng-class="{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]" class="icon-26x26-{{ command.type }}" tooltip="" tooltip-content="{{ command.type | i18n:loc.ale:'common' }}"></span>
+                                        <span class="size-26x26 icon-bg-black icon-26x26-time-duration" tooltip="" tooltip-content="{{ 'command_time_left' | i18n:loc.ale:'command_queue' }}"></span>
+                                        <span class="time-left">{{ command.countdown | readableMillisecondsFilter }}</span>
+
+                                        <span class="size-26x26 icon-bg-black icon-20x20-units-outgoing" tooltip="" tooltip-content="{{ 'command_out' | i18n:loc.ale:'command_queue' }}"></span>
+                                        <span class="sent-time">{{ command.sendTime | readableDateFilter:loc.ale }}</span>
+                                        <span class="size-26x26 icon-bg-black icon-20x20-time-arrival" tooltip="" tooltip-content="{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}"></span>
+                                        <span class="arrive-time">{{ command.arriveTime | readableDateFilter:loc.ale }}</span>
+
+                                        <a href="#" class="remove-command size-20x20 btn-red icon-20x20-close" ng-click="removeCommand(command, EVENT_CODES.COMMAND_REMOVED)" tooltip="" tooltip-content="{{ 'queue_remove' | i18n:loc.ale:'command_queue' }}"></a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'villages' | i18n:loc.ale:'common' }}</td>
+                                    <td>
+                                        <a class="origin"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.origin.id)">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a>
+                                        <span class="size-20x20 icon-26x26-{{ command.type }}"></span>
+                                        <a class="target"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.target.id)">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{ 'units' | i18n:loc.ale:'common' }}</td>
+                                    <td class="units">
+                                        <div class="unit" ng-repeat="(unit, amount) in command.units">
+                                            <span class="icon-34x34-unit-{{ unit }} icon"></span>
+                                            <span class="amount">{{ amount }}</span>
+                                            <span ng-if="unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK">({{ command.catapultTarget | i18n:loc.ale:'building_names' }})</span>
+                                        </div>
+
+                                        <div class="officer" ng-repeat="(officer, enabled) in command.officers">
+                                            <span class="icon-34x34-premium_officer_{{ officer }}"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="logs rich-text" ng-show="selectedTab === TAB_TYPES.LOGS">
+                    <h5 class="twx-section">{{ 'queue_sent' | i18n:loc.ale:'command_queue' }}</h5>
+                    <p class="text-center" ng-show="!sentCommands.length">{{ 'queue_none_sent' | i18n:loc.ale:'command_queue' }}</p>
+                    <table class="tbl-border-light" ng-repeat="command in sentCommands track by $index">
+                        <colgroup>
+                            <col width="100px">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th colspan="2">
+                                    <span ng-class="{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]" class="icon-26x26-{{ command.type }}" tooltip="" tooltip-content="{{ command.type | i18n:loc.ale:'common' }}"></span>
+
+                                    <span class="size-26x26 icon-bg-black icon-20x20-units-outgoing" tooltip="" tooltip-content="{{ 'command_out' | i18n:loc.ale:'command_queue' }}"></span>
+                                    <span class="sent-time">{{ command.sendTime | readableDateFilter:loc.ale }}</span>
+                                    <span class="size-26x26 icon-bg-black icon-20x20-time-arrival" tooltip="" tooltip-content="{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}"></span>
+                                    <span class="arrive-time">{{ command.arriveTime | readableDateFilter:loc.ale }}</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>{{ 'villages' | i18n:loc.ale:'common' }}</td>
+                                <td>
+                                    <a class="origin"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.origin.id)">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a>
+                                    <span class="size-20x20 icon-26x26-{{ command.type }}"></span>
+                                    <a class="target"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.target.id)">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'units' | i18n:loc.ale:'common' }}</td>
+                                <td class="units">
+                                    <div class="unit" ng-repeat="(unit, amount) in command.units">
+                                        <span class="icon-34x34-unit-{{ unit }} icon"></span>
+                                        <span class="amount">{{ amount }}</span>
+                                        <span ng-if="unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span>
+                                    </div>
+
+                                    <div class="officer" ng-repeat="(officer, enabled) in command.officers">
+                                        <span class="icon-34x34-premium_officer_{{ officer }}"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="twx-section">{{ 'queue_expired' | i18n:loc.ale:'command_queue' }}</h5>
+                    <p class="text-center" ng-show="!expiredCommands.length">{{ 'queue_none_expired' | i18n:loc.ale:'command_queue' }}</p>
+                    <table class="tbl-border-light" ng-repeat="command in expiredCommands track by $index">
+                        <colgroup>
+                            <col width="100px">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th colspan="2">
+                                    <span ng-class="{true: 'icon-bg-red', false:'icon-bg-blue'}[command.type === COMMAND_TYPES.ATTACK]" class="icon-26x26-{{ command.type }}" tooltip="" tooltip-content="{{ command.type | i18n:loc.ale:'common' }}"></span>
+
+                                    <span class="size-26x26 icon-bg-black icon-20x20-units-outgoing" tooltip="" tooltip-content="{{ 'command_out' | i18n:loc.ale:'command_queue' }}"></span>
+                                    <span class="sent-time">{{ command.sendTime | readableDateFilter:loc.ale }}</span>
+                                    <span class="size-26x26 icon-bg-black icon-20x20-time-arrival" tooltip="" tooltip-content="{{ 'command_arrive' | i18n:loc.ale:'command_queue' }}"></span>
+                                    <span class="arrive-time">{{ command.arriveTime | readableDateFilter:loc.ale }}</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>{{ 'villages' | i18n:loc.ale:'common' }}</td>
+                                <td>
+                                    <a class="origin"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.origin.id)">{{ command.origin.name }} ({{ command.origin.x }}|{{ command.origin.y }})</span></a>
+                                    <span class="size-20x20 icon-26x26-{{ command.type }}"></span>
+                                    <a class="target"><span class="village-link img-link icon-20x20-village btn btn-orange padded" ng-click="openVillageInfo(command.target.id)">{{ command.target.name }} ({{ command.target.x }}|{{ command.target.y }})</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'units' | i18n:loc.ale:'common' }}</td>
+                                <td class="units">
+                                    <div class="unit" ng-repeat="(unit, amount) in command.units">
+                                        <span class="icon-34x34-unit-{{ unit }} icon"></span>
+                                        <span class="amount">{{ amount }}</span>
+                                        <span ng-if="unit === 'catapult' && command.type === COMMAND_TYPES.ATTACK">({{ command.catapultTarget | i18n:loc.ale:'common' }})</span>
+                                    </div>
+
+                                    <div class="officer" ng-repeat="(officer, enabled) in command.officers">
+                                        <span class="icon-34x34-premium_officer_{{ officer }}"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="win-foot">
+        <ul class="list-btn list-center">
+            <li ng-show="selectedTab === TAB_TYPES.LOGS">
+                <a class="btn-orange btn-border" ng-click="clearRegisters()">{{ 'general_clear' | i18n:loc.ale:'command_queue' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.ADD">
+                <a class="btn-orange btn-border add" ng-click="addCommand(COMMAND_TYPES.ATTACK)"><span class="icon-26x26-attack-small"></span> {{ COMMAND_TYPES.ATTACK | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.ADD">
+                <a class="btn-orange btn-border add" ng-click="addCommand(COMMAND_TYPES.SUPPORT)"><span class="icon-26x26-support"></span> {{ COMMAND_TYPES.SUPPORT | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li ng-show="relocateEnabled && selectedTab === TAB_TYPES.ADD">
+                <a class="btn-orange btn-border add" ng-click="addCommand(COMMAND_TYPES.RELOCATE)"><span class="icon-26x26-relocate"></span> {{ COMMAND_TYPES.RELOCATE | i18n:loc.ale:'common' }}</a>
+            </li>
+
+            <li>
+                <a href="#" ng-class="{false:'btn-green', true:'btn-red'}[running]" class="btn-border" ng-click="switchCommandQueue()">
+                    <span ng-show="running">{{ 'deactivate' | i18n:loc.ale:'common' }}</span>
+                    <span ng-show="!running">{{ 'activate' | i18n:loc.ale:'common' }}</span>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>

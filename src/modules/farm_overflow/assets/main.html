@@ -1,0 +1,335 @@
+<div id="two-farmoverflow" class="win-content two-window">
+    <header class="win-head">
+        <h2>FarmOverflow</h2>
+        <ul class="list-btn">
+            <li><a href="#" class="size-34x34 btn-red icon-26x26-close" ng-click="closeWindow()"></a></li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="tabs tabs-bg">
+            <div class="tabs-three-col">
+                <div class="tab" ng-click="selectTab(TAB_TYPES.SETTINGS)" ng-class="{'tab-active': selectedTab == TAB_TYPES.SETTINGS}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.SETTINGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.SETTINGS}">{{ TAB_TYPES.SETTINGS | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" ng-click="selectTab(TAB_TYPES.VILLAGES)" ng-class="{'tab-active': selectedTab == TAB_TYPES.VILLAGES}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.VILLAGES}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.VILLAGES}">{{ TAB_TYPES.VILLAGES | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" ng-click="selectTab(TAB_TYPES.LOGS)" ng-class="{'tab-active': selectedTab == TAB_TYPES.LOGS}">
+                    <div class="tab-inner">
+                        <div ng-class="{'box-border-light': selectedTab === TAB_TYPES.LOGS}">
+                            <a href="#" ng-class="{'btn-icon btn-orange': selectedTab !== TAB_TYPES.LOGS}">{{ TAB_TYPES.LOGS | i18n:loc.ale:'common' }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-paper footer">
+            <div class="scroll-wrap">
+
+                <!-- settings -->
+                <div class="settings" ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col width="*">
+                            <col width="270px">
+                        </colgroup>
+                        <tr>
+                            <th colspan="2">{{ 'step_cycle_header' | i18n:loc.ale:'farm_overflow' }}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'farmer_behavior' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div select="" list="farmerBehaviorList" selected="selectedFarmerBehavior" drop-down="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'target_behavior' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div select="" list="targetBehaviorList" selected="selectedTargetBehavior" drop-down="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'multiple_attacks_interval' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MULTIPLE_ATTACKS_INTERVAL]" tooltip="" tooltip-content="{{ 'readable_time_format' | i18n:loc.ale:'common' }}"></td>
+                        </tr>
+                    </table>
+
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col width="*">
+                            <col width="270px">
+                        </colgroup>
+                        <tr>
+                            <th colspan="2">{{ 'groups_presets' | i18n:loc.ale:'farm_overflow' }}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'presets' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div select="" list="presets" selected="settings[SETTINGS.PRESETS]" drop-down="true"></div></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'group_ignored' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td class="snowflake"><div select="" list="groupsWithDisabled" selected="settings[SETTINGS.GROUP_IGNORE]" drop-down="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'group_include' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div select="" list="groups" selected="settings[SETTINGS.GROUP_INCLUDE]" drop-down="true"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'group_only' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div select="" list="groups" selected="settings[SETTINGS.GROUP_ONLY]" drop-down="true"></div></td>
+                        </tr>
+                    </table>
+
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col>
+                            <col width="200px">
+                            <col width="60px">
+                        </colgroup>
+                        <tr>
+                            <th colspan="3">{{ 'misc' | i18n:loc.ale:'farm_overflow' }}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'attack_interval' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td colspan="2"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.ATTACK_INTERVAL]" tooltip="" tooltip-content="{{ 'readable_time_format' | i18n:loc.ale:'common' }}"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'farmer_cycle_interval' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td colspan="2"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.FARMER_CYCLE_INTERVAL]" tooltip="" tooltip-content="{{ 'readable_time_format' | i18n:loc.ale:'common' }}"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'preserve_command_slots' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].min" max="settingsMap[SETTINGS.PRESERVE_COMMAND_SLOTS].max" value="settings[SETTINGS.PRESERVE_COMMAND_SLOTS]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.PRESERVE_COMMAND_SLOTS]"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span class="ff-cell-fix">{{ 'ignore_on_loss' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div switch-slider="" enabled="settings[SETTINGS.GROUP_IGNORE].value" border="true" value="settings[SETTINGS.IGNORE_ON_LOSS]" vertical="false" size="'56x28'" tooltip="" tooltip-content="{{ 'ignore_on_loss_tip' | i18n:loc.ale:'farm_overflow' }}"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><span class="ff-cell-fix">{{ 'ignore_full_storage' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div switch-slider="" enabled="true" border="true" value="settings[SETTINGS.IGNORE_FULL_STORAGE]" vertical="false" size="'56x28'"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'target_limit_per_village' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.TARGET_LIMIT].min" max="settingsMap[SETTINGS.TARGET_LIMIT].max" value="settings[SETTINGS.TARGET_LIMIT]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.TARGET_LIMIT]"></td>
+                        </tr>
+                    </table>
+
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col>
+                            <col width="200px">
+                            <col width="60px">
+                        </colgroup>
+                        <tr>
+                            <th colspan="3">{{ 'target_filters' | i18n:loc.ale:'farm_overflow' }}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'min_distance' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.MIN_DISTANCE].min" max="settingsMap[SETTINGS.MIN_DISTANCE].max" value="settings[SETTINGS.MIN_DISTANCE]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MIN_DISTANCE]"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'max_distance' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.MAX_DISTANCE].min" max="settingsMap[SETTINGS.MAX_DISTANCE].max" value="settings[SETTINGS.MAX_DISTANCE]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MAX_DISTANCE]"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'min_points' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.MIN_POINTS].min" max="settingsMap[SETTINGS.MIN_POINTS].max" value="settings[SETTINGS.MIN_POINTS]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MIN_POINTS]"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'max_points' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.MAX_POINTS].min" max="settingsMap[SETTINGS.MAX_POINTS].max" value="settings[SETTINGS.MAX_POINTS]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MAX_POINTS]"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'max_travel_time' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td colspan="2"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.MAX_TRAVEL_TIME]" tooltip="" tooltip-content="{{ 'readable_time_format' | i18n:loc.ale:'common' }}"></td>
+                        </tr>
+                    </table>
+
+                    <table class="tbl-border-light tbl-content tbl-medium-height">
+                        <colgroup>
+                            <col>
+                            <col width="200px">
+                            <col width="60px">
+                        </colgroup>
+                        <tr>
+                            <th colspan="3">{{ 'others' | i18n:loc.ale:'common' }}</th>
+                        </tr>
+                        <tr>
+                            <td><span class="ff-cell-fix">{{ 'logs_limit' | i18n:loc.ale:'farm_overflow' }}</span></td>
+                            <td><div range-slider="" min="settingsMap[SETTINGS.LOGS_LIMIT].min" max="settingsMap[SETTINGS.LOGS_LIMIT].max" value="settings[SETTINGS.LOGS_LIMIT]" enabled="true"></div></td>
+                            <td class="cell-bottom"><input type="text" class="fit textfield-border text-center" ng-model="settings[SETTINGS.LOGS_LIMIT]"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- villages -->
+                <div class="villages rich-text" ng-show="selectedTab === TAB_TYPES.VILLAGES">
+                    <p ng-show="showCycleTimer" class="text-center">{{ 'next_cycle_in' | i18n:loc.ale:'farm_overflow' }}: {{ nextCycleCountdown | readableMillisecondsFilter }}</p>
+
+                    <h5 class="twx-section">{{ 'farmer_villages' | i18n:loc.ale:'farm_overflow' }}</h5>
+                    <p ng-show="!farmers.length" class="text-center">{{ 'no_farmer_villages' | i18n:loc.ale:'farm_overflow' }}</p>
+                    <table class="tbl-border-light tbl-striped" ng-show="farmers.length">
+                        <colgroup>
+                            <col>
+                            <col width="40%">
+                            <col width="20%">
+                        </colgroup>
+                        <tr>
+                            <th>{{ 'villages' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'last_status' | i18n:loc.ale:'farm_overflow' }}</th>
+                            <th>{{ 'target' | i18n:loc.ale:'common':2 }}</th>
+                        </tr>
+                        <tr ng-repeat="farmer in farmers">
+                            <td>
+                                <span ng-class="{true:'icon-20x20-queue-indicator-long', false:'icon-20x20-queue-indicator-short'}[farmer.isRunning()]"></span>
+                                <a class="link" ng-click="openVillageInfo(farmer.getVillage().getId())"><span class="icon-20x20-village"></span> {{ farmer.getVillage().getName() }} ({{ farmer.getVillage().getX() }}|{{ farmer.getVillage().getY() }})</a>
+                            </td>
+                            <td>{{ 'status_' + farmer.getStatus() | i18n:loc.ale:'farm_overflow' }}</td>
+                            <td ng-if="farmer.getTargets()"><span ng-if="farmer.isRunning()">{{ farmer.getIndex() }} / </span><span>{{ farmer.getTargets().length }}</span></td>
+                            <td ng-if="!farmer.getTargets()">{{ 'not_loaded' | i18n:loc.ale:'farm_overflow' }}</td>
+                        </tr>
+                    </table>
+
+                    <h5 class="twx-section">{{ 'ignored_targets' | i18n:loc.ale:'farm_overflow' }}</h5>
+                    <p ng-if="!exceptionVillages.ignored.length" class="text-center">{{ 'no_ignored_targets' | i18n:loc.ale:'farm_overflow' }}</p>
+                    <table class="ignored-villages tbl-border-light tbl-striped" ng-show="exceptionVillages.ignored.length">
+                        <colgroup>
+                            <col>
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="30px">
+                        </colgroup>
+                        <tr>
+                            <th>{{ 'villages' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}</th>
+                            <th>{{ 'reports' | i18n:loc.ale:'farm_overflow' }}</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="villageId in exceptionVillages.ignored track by $index">
+                            <td><a class="link" ng-click="openVillageInfo(villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[villageId] }}</a></td>
+                            <td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</td>
+                            <td>
+                                <span ng-if="exceptionLogs[villageId].report">
+                                    <a class="link" ng-click="showReport(exceptionLogs[villageId].report.id)" tooltip="" tooltip-content="{{ exceptionLogs[villageId].report.title }}"><span class="icon-20x20-report"></span> {{ 'open_report' | i18n:loc.ale:'farm_overflow' }}</a>
+                                    <span ng-class="{2:'icon-20x20-queue-indicator-medium', 3:'icon-20x20-queue-indicator-short'}[exceptionLogs[villageId].report.result]"></span>
+                                    <span ng-class="{'full': 'icon-26x26-capacity', 'partial':'icon-26x26-capacity-low', 'none':'hidden'}[exceptionLogs[villageId].report.haul]"></span>
+                                </span>
+                                <span ng-if="!exceptionLogs[villageId].report">{{ 'no_report' | i18n:loc.ale:'farm_overflow' }}</span>
+                            </td>
+                            <td><a href="#" class="size-20x20 btn-red icon-20x20-close" ng-click="removeIgnored(villageId)" tooltip="" tooltip-content=""></a></td>
+                        </tr>
+                    </table>
+
+                    <h5 class="twx-section">{{ 'included_targets' | i18n:loc.ale:'farm_overflow' }}</h5>
+                    <p ng-if="!exceptionVillages.included.length" class="text-center">{{ 'no_included_targets' | i18n:loc.ale:'farm_overflow' }}</p>
+                    <table class="tbl-border-light tbl-striped" ng-show="exceptionVillages.included.length">
+                        <colgroup>
+                            <col>
+                            <col width="15%">
+                            <col width="30px">
+                        </colgroup>
+                        <tr>
+                            <th>{{ 'villages' | i18n:loc.ale:'common' }}</th>
+                            <th>{{ 'date' | i18n:loc.ale:'farm_overflow' }}</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="villageId in exceptionVillages.included track by $index">
+                            <td><a class="link" ng-click="openVillageInfo(villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[villageId] }}</a></td>
+                            <td>{{ exceptionLogs[villageId].time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</td>
+                            <td><a href="#" class="size-20x20 btn-red icon-20x20-close" ng-click="removeIncluded(villageId)" tooltip="" tooltip-content=""></a></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- logs -->
+                <div class="logs rich-text" ng-show="selectedTab === TAB_TYPES.LOGS">
+                    <div class="page-wrap" pagination="pagination"></div>
+                    <p class="text-center" ng-show="!visibleLogs.length">{{ 'no_logs' | i18n:loc.ale:'farm_overflow' }}</p>
+                    <table class="log-list tbl-border-light tbl-striped" ng-show="visibleLogs.length">
+                        <colgroup>
+                            <col width="100px">
+                            <col width="30px">
+                            <col>
+                        </colgroup>
+                        <tr ng-repeat="log in visibleLogs track by $index">
+                            <td>{{ log.time | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}</td>
+                            <td><span class="icon-bg-black" ng-class="{
+                                'icon-26x26-dot-green': log.type === LOG_TYPES.FARM_START,
+                                'icon-26x26-dot-red': log.type === LOG_TYPES.FARM_STOP,
+                                'icon-26x26-check-negative': log.type === LOG_TYPES.IGNORED_VILLAGE || log.type === LOG_TYPES.INCLUDED_VILLAGE_REMOVED,
+                                'icon-26x26-check-positive': log.type === LOG_TYPES.INCLUDED_VILLAGE || log.type === LOG_TYPES.IGNORED_VILLAGE_REMOVED,
+                                'icon-26x26-attack-small': log.type === LOG_TYPES.ATTACKED_VILLAGE}"></span></td>
+
+                            <td ng-if="log.type === LOG_TYPES.ATTACKED_VILLAGE">
+                                <span class="icon-26x26-attack-small"></span>
+                                <a class="link" ng-click="openVillageInfo(log.targetId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.targetId] }}</a>
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.IGNORED_VILLAGE">
+                                <a class="link" ng-click="openVillageInfo(log.villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.villageId] }}</a>
+                                {{ 'ignored_village' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.IGNORED_VILLAGE_REMOVED">
+                                <a class="link" ng-click="openVillageInfo(log.villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.villageId] }}</a>
+                                {{ 'ignored_village_removed' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.INCLUDED_VILLAGE">
+                                <a class="link" ng-click="openVillageInfo(log.villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.villageId] }}</a>
+                                {{ 'included_village' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.INCLUDED_VILLAGE_REMOVED">
+                                <a class="link" ng-click="openVillageInfo(log.villageId)"><span class="icon-20x20-village"></span> {{ villagesLabel[log.villageId] }}</a>
+                                {{ 'included_village_removed' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.FARM_START">
+                                {{ 'farm_started' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+
+                            <td ng-if="log.type === LOG_TYPES.FARM_STOP">
+                                {{ 'farm_stopped' | i18n:loc.ale:'farm_overflow' }}
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="page-wrap" pagination="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="win-foot">
+        <ul class="list-btn list-center">
+            <li ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                <a href="#" class="btn-border btn-orange" ng-click="resetSettings()">{{ 'reset_settings' | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.SETTINGS">
+                <a href="#" class="btn-border btn-{{ saveButtonColor }}" ng-click="saveSettings()">{{ 'save' | i18n:loc.ale:'common' }}</a>
+            </li>
+            <li ng-show="selectedTab === TAB_TYPES.LOGS">
+                <a href="#" class="btn-border btn-orange" ng-click="clearLogs()">{{ 'clear_logs' | i18n:loc.ale:'farm_overflow' }}</a>
+            </li>
+            <li>
+                <a href="#" ng-class="{false:'btn-green', true:'btn-red'}[running]" class="btn-border" ng-click="switchFarm()">
+                    <span ng-show="running">{{ 'pause' | i18n:loc.ale:'common' }}</span>
+                    <span ng-show="!running">{{ 'start' | i18n:loc.ale:'common' }}</span>
+                </a>
+            </li>
+        </ul>
+    </footer>
+</div>

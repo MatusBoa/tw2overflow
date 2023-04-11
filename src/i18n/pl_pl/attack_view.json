@@ -1,0 +1,20 @@
+{
+    "attack_view": {
+        "filter_types": "Rodzaj",
+        "filter_show_attacks_tooltip": "Pokaż ataki",
+        "filter_show_supports_tooltip": "Pokaż wsparcia",
+        "filter_show_relocations_tooltip": "Pokaż przeniesienia",
+        "filter_incoming_units": "Nadchodzące jednostki",
+        "commands_copy_arrival_tooltip": "Kopiuj czas dotarcia.",
+        "commands_copy_backtime_tooltip": "Kopiuj czas powrotu do wioski źródłowej.",
+        "commands_set_remove_tooltip": "Wstaw rozkaz wycofania wojsk przed dotarciem ataku do Kolejki rozkazów.",
+        "command_type_tooltip": "Rodzaj",
+        "slowest_unit_tooltip": "Najwolniejsza jednostka",
+        "command_type": "Rodzaj",
+        "slowest_unit": "Co?",
+        "actions": "Dostępne akcje",
+        "no_incoming": "Brak nadchodzących wojsk.",
+        "copy": "Kopiuj",
+        "current_only_tooltip": "Tylko aktywna wioska"
+    }
+}

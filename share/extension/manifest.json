@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "${name}",
+  "version": "${version}",
+  "description": "${description}",
+  "icons": {
+    "128": "overflow-128.png"
+  },
+  "browser_action": {
+    "default_icon": "overflow.png"
+  },
+  "author": "${author.name} <${author.email}>",
+  "content_scripts": [{
+    "js": ["loader.js"],
+    "matches": ["https://*.tribalwars2.com/game.php*"],
+    "run_at": "document_end"
+  }],
+  "homepage_url": "${homepage}",
+  "permissions": ["https://*.tribalwars2.com/game.php*"],
+  "web_accessible_resources": ["tw2overflow.js"]
+}

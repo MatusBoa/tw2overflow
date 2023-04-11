@@ -1,0 +1,141 @@
+<div id="two-attack-view" class="win-content two-window">
+    <header class="win-head">
+        <h2>AttackView</h2>
+        <ul class="list-btn">
+            <li><a href="#" class="size-34x34 btn-orange icon-26x26-double-arrow" ng-click="switchWindowSize()"></a></li>
+            <li><a href="#" class="size-34x34 btn-red icon-26x26-close" ng-click="closeWindow()"></a></li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper">
+            <div class="scroll-wrap rich-text">
+                <div class="filters">
+                    <table class="tbl-border-light">
+                        <tbody>
+                            <tr><th>{{ 'village' | i18n:loc.ale:'common' }}</th></tr>
+                            <tr>
+                                <td>
+                                    <div class="box-border-dark icon" ng-class="{'active': filters[FILTER_TYPES.VILLAGE]}" ng-click="toggleFilter(FILTER_TYPES.VILLAGE)" tooltip="" tooltip-content="{{ 'current_only_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                        <span class="icon-34x34-village-info icon-bg-black"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tbl-border-light">
+                        <tbody>
+                            <tr><th>{{ 'filter_types' | i18n:loc.ale:'attack_view' }}</th></tr>
+                            <tr>
+                                <td>
+                                    <div class="box-border-dark icon" ng-class="{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.ATTACK]}" ng-click="toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.ATTACK)" tooltip="" tooltip-content="{{ 'filter_show_attacks_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                        <span class="icon-34x34-attack icon-bg-black"></span>
+                                    </div>
+                                    <div class="box-border-dark icon" ng-class="{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.SUPPORT]}" ng-click="toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.SUPPORT)" tooltip="" tooltip-content="{{ 'filter_show_supports_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                        <span class="icon-34x34-support icon-bg-black"></span>
+                                    </div>
+                                    <div class="box-border-dark icon" ng-class="{'active': filters[FILTER_TYPES.COMMAND_TYPES][COMMAND_TYPES.RELOCATE]}" ng-click="toggleFilter(FILTER_TYPES.COMMAND_TYPES, COMMAND_TYPES.RELOCATE)" tooltip="" tooltip-content="{{ 'filter_show_relocations_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                        <span class="icon-34x34-relocate icon-bg-black"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="tbl-border-light">
+                        <tbody>
+                            <tr><th>{{ 'filter_incoming_units' | i18n:loc.ale:'attack_view' }}</th></tr>
+                            <tr>
+                                <td>
+                                    <div ng-repeat="unit in ::UNIT_SPEED_ORDER" class="box-border-dark icon" ng-class="{'active': filters[FILTER_TYPES.INCOMING_UNITS][unit]}" ng-click="toggleFilter(FILTER_TYPES.INCOMING_UNITS, unit)" tooltip="" tooltip-content="{{ unit | i18n:loc.ale:'unit_names' }}">
+                                        <span class="icon-34x34-unit-{{ unit }} icon-bg-black"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-wrap" pagination="pagination"></div>
+
+                <p class="text-center" ng-show="!visibleCommands.length">{{ 'no_incoming' | i18n:loc.ale:'attack_view' }}</p>
+
+                <table class="tbl-border-light commands-table" ng-show="visibleCommands.length">
+                    <colgroup>
+                        <col width="8%">
+                        <col width="14%">
+                        <col>
+                        <col>
+                        <col width="4%">
+                        <col width="15%">
+                        <col width="11%">
+                    </colgroup>
+                    <thead class="sorting">
+                        <tr>
+                            <th ng-click="toggleSorting(COLUMN_TYPES.COMMAND_TYPE)" tooltip="" tooltip-content="{{ 'command_type_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                {{ 'command_type' | i18n:loc.ale:'attack_view' }}
+                                <span class="arrow" ng-show="sorting.column == COLUMN_TYPES.COMMAND_TYPE" ng-class="{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}"></span>
+                            </th>
+                            <th ng-click="toggleSorting(COLUMN_TYPES.ORIGIN_CHARACTER)">
+                                {{ 'player' | i18n:loc.ale:'common' }}
+                                <span class="arrow" ng-show="sorting.column == COLUMN_TYPES.ORIGIN_CHARACTER" ng-class="{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}"></span>
+                            </th>
+                            <th ng-click="toggleSorting(COLUMN_TYPES.ORIGIN_VILLAGE)">
+                                {{ 'origin' | i18n:loc.ale:'common' }}
+                                <span class="arrow" ng-show="sorting.column == COLUMN_TYPES.ORIGIN_VILLAGE" ng-class="{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}"></span>
+                            </th>
+                            <th ng-click="toggleSorting(COLUMN_TYPES.TARGET_VILLAGE)">
+                                {{ 'target' | i18n:loc.ale:'common' }}
+                                <span class="arrow" ng-show="sorting.column == COLUMN_TYPES.TARGET_VILLAGE" ng-class="{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}"></span>
+                            </th>
+                            <th tooltip="" tooltip-content="{{ 'slowest_unit_tooltip' | i18n:loc.ale:'attack_view' }}">
+                                {{ 'slowest_unit' | i18n:loc.ale:'attack_view' }}
+                            </th>
+                            <th ng-click="toggleSorting(COLUMN_TYPES.TIME_COMPLETED)">
+                                {{ 'arrive' | i18n:loc.ale:'common' }}
+                                <span class="arrow" ng-show="sorting.column == COLUMN_TYPES.TIME_COMPLETED" ng-class="{'icon-26x26-normal-arrow-down': sorting.reverse, 'icon-26x26-normal-arrow-up': !sorting.reverse}"></span>
+                            </th>
+                            <th>
+                                {{ 'actions' | i18n:loc.ale:'attack_view' }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="command in visibleCommands" class="{{ command.command_type }}" ng-class="{'snob': command.slowestUnit === UNIT_TYPES.SNOB}">
+                            <td>
+                                <span class="icon-20x20-{{ command.command_type }}"></span>
+                            </td>
+                            <td ng-click="openCharacterProfile(command.originCharacter.id)" class="character">
+                                <span class="name">{{ command.originCharacter.name }}</span>
+                            </td>
+                            <td ng-class="{'selected': command.originVillage.id === selectedVillageId}" class="village">
+                                <span class="name" ng-click="openVillageInfo(command.originVillage.id)">{{ command.originVillage.name }}</span>
+                                <span class="coords" ng-click="jumpToVillage(command.originVillage.x, command.originVillage.y)">({{ command.originVillage.x }}|{{ command.originVillage.y }})</span>
+                            </td>
+                            <td ng-class="{'selected': command.targetVillage.id === selectedVillageId}" class="village">
+                                <span class="name" ng-click="openVillageInfo(command.targetVillage.id)">{{ command.targetVillage.name }}</span>
+                                <span class="coords" ng-click="jumpToVillage(command.targetVillage.x, command.targetVillage.y)">({{ command.targetVillage.x }}|{{ command.targetVillage.y }})</span>
+                            </td>
+                            <td><span class="icon-20x20-unit-{{ command.slowestUnit }}"></span></td>
+                            <td>
+                                <div class="progress-wrapper" tooltip="" tooltip-content="{{ command.model.arrivalTime() | readableDateFilter:loc.ale:GAME_TIMEZONE:GAME_TIME_OFFSET }}">
+                                    <div class="progress-bar" ng-style="{width: command.model.percent() + '%'}"></div>
+                                    <div class="progress-text">
+                                        <span>{{ command.model.countdown() }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a ng-click="copyTimeModal(command.time_completed)" class="btn btn-orange size-20x20 icon-20x20-arrivetime" tooltip="" tooltip-content="{{ 'commands_copy_arrival_tooltip' | i18n:loc.ale:'attack_view' }}"></a>
+                                <a ng-click="copyTimeModal(command.time_completed + (command.time_completed - command.time_start))" class="btn btn-red size-20x20 icon-20x20-backtime" tooltip="" tooltip-content="{{ 'commands_copy_backtime_tooltip' | i18n:loc.ale:'attack_view' }}"></a>
+                                <a ng-if="commandQueueEnabled" ng-click="removeTroops(command)" class="btn btn-orange size-20x20 icon-20x20-units-outgoing" tooltip="" tooltip-content="{{ 'commands_set_remove_tooltip' | i18n:loc.ale:'attack_view' }}"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="page-wrap" pagination="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>

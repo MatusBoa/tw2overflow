@@ -1,0 +1,9 @@
+{
+    "auto_minter": {
+        "enabled_groups": "Präge Münzen nur in Dörfern dieser Gruppe",
+        "preserve_wood": "Holz im Dorf aufbewahren",
+        "preserve_clay": "Lehm im Dorf aufbewahren",
+        "preserve_iron": "Eisen im Dorf aufbewahren",
+        "check_interval": "Intervall: Präge Münzen alle"
+    }
+}

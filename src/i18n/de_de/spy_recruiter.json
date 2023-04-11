@@ -1,0 +1,10 @@
+{
+    "spy_recruiter": {
+        "enabled_groups": "Spione nur in Dörfern mit diesen Gruppen rekrutieren",
+        "preserve_wood": "Holz im Dorf aufbewahren",
+        "preserve_clay": "Lehm im Dorf aufbewahren",
+        "preserve_iron": "Eisen im Dorf aufbewahren",
+        "check_interval": "Intervall: Spione alle X rekrutieren",
+        "recruit_single_spy": "Pro Zyklus nur einen Spion pro Dorf rekrutieren?"
+    }
+}

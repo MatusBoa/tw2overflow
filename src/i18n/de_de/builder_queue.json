@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "Automatischer Dorfausbau gestartet",
+        "stopped": "Automatischer Dorfausbau angehalten",
+        "settings": "Einstellungen",
+        "settings_village_groups": "Ausbau von Dörfern mit den Gruppen",
+        "settings_building_sequence": "Reihenfolge",
+        "settings_building_sequence_final": "Finale Gebäudestufen",
+        "settings_priorize_farm": "Bevorzuge volle Farmen",
+        "settings_saved": "Einstellungen gespeichert!",
+        "logs_no_builds": "Kein Ausbau gestartet",
+        "logs_clear": "Protokoll löschen",
+        "sequences": "Sequenzen",
+        "sequences_move_up": "Bewege nach oben",
+        "sequences_move_down": "Bewege nach unten",
+        "sequences_add_building": "Gebäudestufe hinzufügen",
+        "sequences_select_edit": "Sequenz zum Ändern wählen",
+        "sequences_edit_sequence": "Sequenz ändern",
+        "select_group": "Gruppe wählen",
+        "add_building_success": "%d wurde auf Platz %d hinzugefügt",
+        "add_building_limit_exceeded": "%d hat die Höchststufe erreicht (%d)",
+        "position": "Platz",
+        "remove_building": "Entferne Gebäudestufe aus der Sequenz",
+        "clone": "Kopieren",
+        "remove_sequence": "Lösche gewählte Sequenz",
+        "name_sequence_min_lenght": "Name muss mindestens aus 3 Zeichen bestehen.",
+        "sequence_created": "Neue Sequenz %d erstellt.",
+        "sequence_updated": "Sequenz %d aktualisiert.",
+        "sequence_removed": "Sequenz %d entfernt.",
+        "error_sequence_exists": "Diese Sequenz existiert bereits.",
+        "error_sequence_no_exists": "Diese Sequenz existiert nicht.",
+        "error_sequence_invalid": "Manche Werte dieser Sequenz sind ungültig.",
+        "logs_cleared": "Protokoll gelöscht.",
+        "create_sequence": "Sequenz erstellen",
+        "settings_preserve_resources": "Dorf-Ressourcen aufbewahren",
+        "settings_preserve_wood": "Holz im Dorf aufbewahren",
+        "settings_preserve_clay": "Lehm im Dorf aufbewahren",
+        "settings_preserve_iron": "Eisen im Dorf aufbewahren",
+        "discard_changes_title": "",
+        "discard_changes_text": "",
+        "clone_warn_changed_sequence_title": "Sequenz geändert",
+        "clone_warn_changed_sequence_text": "",
+        "clone_sequence": "Kopiere gewählte Sequenz",
+        "amount": "Anzahl",
+        "empty_sequence": "Leere Sequenz"
+    },
+    "builder_queue_add_building_modal": {
+        "title": "Neue Gebäudestufe hinzufügen"
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": "Name der Sequenz"
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "Sequenz entfernen",
+        "text": "Möchtest Du diese Sequenz wirklich entfernen? Wenn diese Sequenz aktiv ist, wird eine andere gewählt und die automatische Bauschleifenbefüllung gestoppt."
+    }
+}

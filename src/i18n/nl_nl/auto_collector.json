@@ -1,0 +1,7 @@
+{
+    "auto_collector": {
+        "description": "Automatische voorraad depot en tweede dorp opdrachten verzamelaar.",
+        "activated": "Automatische verzamelaar geactiveerd",
+        "deactivated": "Automatische verzamelaar gedeactiveerd"
+    }
+}

@@ -1,0 +1,54 @@
+<div id="two-about" class="win-content">
+    <header class="win-head">
+        <h3>___overflow_name v___overflow_version</h3>
+        <ul class="list-btn sprite">
+            <li> <a href="#" class="btn-red icon-26x26-close" ng-click="closeWindow()"></a> </li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper footer">
+            <div class="scroll-wrap">
+                <div class="logo">
+                    <img src="https://i.imgur.com/iNcVMvw.png"/>
+                </div>
+
+                <table class="tbl-border-light tbl-content tbl-medium-height">
+                    <tr>
+                        <th colspan="2">{{ 'contact' | i18n:loc.ale:'about' }}</th>
+                    </tr>
+                    <tr>
+                        <td>{{ 'email' | i18n:loc.ale:'about' }}</td>
+                        <td>___overflow_author_email</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">If you are willing to pay $, I'm willing to make personal scripts for you.</td>
+                    </tr>
+                </table>
+
+                <table class="tbl-border-light tbl-content tbl-medium-height">
+                    <tr>
+                        <th colspan="2">{{ 'links' | i18n:loc.ale:'about' }}</th>
+                    </tr>
+                    <tr>
+                        <td>{{ 'source_code' | i18n:loc.ale:'about' }}</td>
+                        <td><a href="https://gitlab.com/relaxeaza/twoverflow/" target="_blank">https://gitlab.com/relaxeaza/twoverflow/</a></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'issues_suggestions' | i18n:loc.ale:'about' }}</td>
+                        <td><a href="https://gitlab.com/relaxeaza/twoverflow/issues" target="_blank">https://gitlab.com/relaxeaza/twoverflow/issues</a></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'translations' | i18n:loc.ale:'about' }}</td>
+                        <td><a href="https://crowdin.com/project/twoverflow" target="_blank">https://crowdin.com/project/twoverflow</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="win-foot">
+        <ul class="list-btn list-center">
+            <li><a href="#" class="btn-border btn-red" ng-click="closeWindow()">{{ 'cancel' | i18n:loc.ale:'common' }}</a></li>
+        </ul>
+    </footer>
+</div>

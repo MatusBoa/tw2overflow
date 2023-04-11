@@ -1,0 +1,57 @@
+{
+    "builder_queue": {
+        "started": "BuilderQueue iniciado",
+        "stopped": "BuilderQueue parado",
+        "settings": "Configurações",
+        "settings_village_groups": "Construir apenas em aldeias do grupo",
+        "settings_building_sequence": "Sequência de construções",
+        "settings_building_sequence_final": "Nível final das construções",
+        "settings_priorize_farm": "Priorizar fazenda se estiver lotada",
+        "settings_saved": "Configurações salvas!",
+        "logs_no_builds": "Nenhuma construção iniciada",
+        "logs_clear": "Limpar registros",
+        "sequences": "Sequências",
+        "sequences_move_up": "Mover acima",
+        "sequences_move_down": "Mover abaixo",
+        "sequences_add_building": "Adicionar edifício",
+        "sequences_select_edit": "Selecione uma sequência para editar",
+        "sequences_edit_sequence": "Editar sequência",
+        "select_group": "Selecione um grupo",
+        "add_building_success": "%d foi adicionado à posição %d",
+        "add_building_limit_exceeded": "%d chegou ao nível máximo (%d)",
+        "position": "Posição",
+        "remove_building": "Remover edifício da lista",
+        "clone": "Clonar",
+        "remove_sequence": "Remover sequência selecionada",
+        "name_sequence_min_lenght": "O nome da sequência deve ter pelo menos 3 caracteres.",
+        "sequence_created": "Nova sequência %d criada.",
+        "sequence_updated": "Sequência %d atualizada.",
+        "sequence_removed": "Sequência %d removida.",
+        "error_sequence_exists": "Esta sequência já existe.",
+        "error_sequence_no_exists": "Essa sequência não existe.",
+        "error_sequence_invalid": "Algum valor da sequência é inválido.",
+        "logs_cleared": "Registro limpo.",
+        "create_sequence": "Criar uma sequência",
+        "settings_preserve_resources": "Preservar recursos das aldeias",
+        "settings_preserve_wood": "Preservar madeira das aldeias",
+        "settings_preserve_clay": "Preservar argila das aldeias",
+        "settings_preserve_iron": "Preservar ferro das aldeias",
+        "discard_changes_title": "Sequência não salva",
+        "discard_changes_text": "A sequência selecionada tem alterações não salvas. Tem certeza que deseja descartar  as alterações?",
+        "clone_warn_changed_sequence_title": "Sequência alterada",
+        "clone_warn_changed_sequence_text": "A sequência que você está tentando clonar foi alterada. Se aceitar, a versão antiga será clonada.",
+        "clone_sequence": "Clonar sequência selecionada",
+        "amount": "Quantidade",
+        "empty_sequence": "Sequência vazia"
+    },
+    "builder_queue_add_building_modal": {
+        "title": "Adicionar novo edifício"
+    },
+    "builder_queue_name_sequence_modal": {
+        "title": "Nomear sequência"
+    },
+    "builder_queue_remove_sequence_modal": {
+        "title": "Remover sequência",
+        "text": "Tem certeza que deseja remover esta sequência? Se esta sequência estiver ativa, outra será selecionada e o BuilderQueue será parado."
+    }
+}

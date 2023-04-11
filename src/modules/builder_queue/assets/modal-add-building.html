@@ -1,0 +1,41 @@
+<div id="add-building-modal" class="win-content">
+    <header class="win-head">
+        <h3>{{ 'title' | i18n:loc.ale:'builder_queue_add_building_modal' }}</h3>
+        <ul class="list-btn sprite">
+            <li> <a href="#" class="btn-red icon-26x26-close" ng-click="closeWindow()"></a> </li>
+        </ul>
+    </header>
+    <div class="win-main" scrollbar="">
+        <div class="box-paper">
+            <div class="scroll-wrap unit-operate-slider">
+                <table class="tbl-border-light tbl-striped header-center">
+                    <colgroup>
+                        <col width="15%">
+                        <col>
+                        <col width="15%">
+                    </colgroup>
+                    <tr>
+                        <td>{{ 'building' | i18n:loc.ale:'common' }}</td>
+                        <td colspan="2"><div select="" list="buildings" selected="selectedBuilding" drop-down="true"></div></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'position' | i18n:loc.ale:'builder_queue' }}</td>
+                        <td><div range-slider="" min="1" max="indexLimit" value="position" enabled="true"></div></td>
+                        <td><input type="number" class="input-border text-center" ng-model="position"></td>
+                    </tr>
+                    <tr>
+                        <td>{{ 'amount' | i18n:loc.ale:'builder_queue' }}</td>
+                        <td><div range-slider="" min="1" max="buildingsData[selectedBuilding.value].max_level" value="amount" enabled="true"></div></td>
+                        <td><input type="number" class="input-border text-center" ng-model="amount"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="win-foot sprite-fill">
+        <ul class="list-btn list-center">
+            <li> <a href="#" class="btn-red btn-border btn-premium" ng-click="closeWindow()"> {{ 'cancel' | i18n:loc.ale:'common' }} </a> </li>
+            <li> <a href="#" class="btn-orange btn-border" ng-click="add()">{{ 'add' | i18n:loc.ale:'common' }}</a> </li>
+        </ul>
+    </footer>
+</div>

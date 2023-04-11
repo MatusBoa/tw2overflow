@@ -1,0 +1,7 @@
+{
+    "auto_collector": {
+        "description": "Automatické Ukládání či Přesun surovin do druhé vesnice.",
+        "activated": "Automatické ukládání aktivováno",
+        "deactivated": "Automatické ukládání deaktivováno"
+    }
+}
