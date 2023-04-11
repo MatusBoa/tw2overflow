@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Tribal Wars 2 Overflow - Automating the boring stuff.</h1>
-  <h3>Origina <a href="https://gitlab.com/relaxeaza/twoverflow">TW2Overflow</a></h3>
+  <h3>Fork of <a href="https://gitlab.com/relaxeaza/twoverflow">TW2Overflow</a></h3>
   <img src="share/logo/banner.png" alt="tw2overflow-banner" />
 </div>
 
