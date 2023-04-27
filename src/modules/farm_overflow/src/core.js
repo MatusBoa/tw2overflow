@@ -617,7 +617,10 @@ define('two/farmOverflow', [
     };
 
     const getAttackInterval = function () {
-        return Math.max(MINIMUM_ATTACK_INTERVAL, localSettings[SETTINGS.ATTACK_INTERVAL]);
+        const min = localSettings[SETTINGS.ATTACK_INTERVAL];
+        const max = min * 1.5;
+
+        return Math.random() * (max - min) + min;
     };
 
     function incomingCommandsFilter (command) {

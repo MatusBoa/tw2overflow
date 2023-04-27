@@ -55,6 +55,10 @@ cd twoverflow
 npm install
 ```
 
+### Development
+
+
+
 To compile run `node make.js`. The script will be compiled inside `dist/`
 
 ### Build Flags

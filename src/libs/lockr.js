@@ -1,18 +1,26 @@
 /**
  * https://github.com/tsironis/lockr
  */
-define('Lockr', function (root, Lockr) {
+define('Lockr', function (utils, root, Lockr) {
     const [, worldId, characterId] = location.search.match(/world=([a-z0-9]+).*character_id=(\d+)/);
 
-    Lockr.prefix = `${characterId}_twOverflow_${worldId}-`;
+    const toBase64 = function (origin) {
+        return window.btoa(encodeURIComponent(origin))
+    }
+
+    const fromBase64 = function (origin) {
+        return decodeURIComponent(window.atob(origin))
+    }
+
+    Lockr.prefix = `google_ads_n0_${toBase64(characterId + worldId)}/`;
 
     Lockr._getPrefixedKey = function (key, options) {
         options = options || {};
 
         if (options.noPrefix) {
-            return key;
+            return toBase64(key);
         } else {
-            return this.prefix + key;
+            return this.prefix + toBase64(key);
         }
 
     };
@@ -21,9 +29,11 @@ define('Lockr', function (root, Lockr) {
         const query_key = this._getPrefixedKey(key, options);
 
         try {
-            localStorage.setItem(query_key, JSON.stringify({
-                data: value
-            }));
+            localStorage.setItem(query_key, toBase64(
+                JSON.stringify({
+                    data: value
+                })
+            ));
         } catch (e) {}
     };
 
@@ -32,11 +42,11 @@ define('Lockr', function (root, Lockr) {
         let value;
 
         try {
-            value = JSON.parse(localStorage.getItem(query_key));
+            value = JSON.parse(fromBase64(localStorage.getItem(query_key)));
         } catch (e) {
             if (localStorage[query_key]) {
                 value = {
-                    data: localStorage.getItem(query_key)
+                    data: fromBase64(localStorage.getItem(query_key))
                 };
             } else {
                 value = null;

@@ -17,15 +17,16 @@
   "devDependencies": {
     "archiver": "^5.2.0",
     "eslint": "^6.8.0",
+    "git-promise": "^1.0.0",
     "glob": "^7.1.6",
     "html-minifier": "^4.0.0",
+    "http-server": "^14.1.1",
     "less": "^3.11.1",
     "terser": "^4.4.2",
     "yargs": "^15.3.1"
   },
   "scripts": {
-    "make": "node make.js --lint --minify",
+    "make": "node make.js --minify",
     "server": "http-server ./dist/ --ssl --cert=share/server/cert.pem --key=share/server/key.pem -p 2838"
-  },
-  "dependencies": {}
+  }
 }
